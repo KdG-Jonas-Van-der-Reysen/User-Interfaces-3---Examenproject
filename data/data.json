@@ -1,0 +1,80 @@
+{
+  "soundboards": [
+    {
+      "id": 1,
+      "name": "Katachtigen",
+      "image": "https://i.imgur.com/LEFRENk.png"
+    },
+    {
+      "id": 2,
+      "name": "Hondachtigen",
+      "image": "https://i.imgur.com/wgiaupz.png"
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "name": "Kat",
+      "image": "https://i.imgur.com/45ArxEq.png",
+      "sound": "https://www.google.com/logos/fnbx/animal_sounds/cat.mp3",
+      "quote": "Meooow",
+      "soundboardId": 1
+    },
+    {
+      "id": 2,
+      "name": "Tijger",
+      "image": "https://i.imgur.com/LnBNEmz.png",
+      "sound": "https://www.google.com/logos/fnbx/animal_sounds/tiger.mp3",
+      "quote": "Raauuurr",
+      "soundboardId": 1
+    },
+    {
+      "id": 3,
+      "name": "Luipaard",
+      "image": "https://i.imgur.com/tB9vOhw.png",
+      "sound": "https://www.google.com/logos/fnbx/animal_sounds/leopard.mp3",
+      "quote": "GRRRRR",
+      "soundboardId": 1
+    },
+    {
+      "id": 4,
+      "name": "Hond",
+      "image": "https://i.imgur.com/gSunt4P.png",
+      "sound": "https://www.google.com/logos/fnbx/animal_sounds/dog.mp3",
+      "quote": "Hehehehehe... WAF",
+      "soundboardId": 2
+    },
+    {
+      "id": 5,
+      "name": "Vos",
+      "image": "https://i.imgur.com/Em9DyxA.png",
+      "sound": "http://jonasgamertv.com/uploads/files/fox.mp3",
+      "quote": "WAUW... WAUW... WAUW....",
+      "soundboardId": 2
+    },
+    {
+      "id": 6,
+      "name": "Hyena",
+      "image": "https://i.imgur.com/6O7i7Mp.png",
+      "sound": "http://jonasgamertv.com/uploads/files/hyena.mp3",
+      "quote": "OE OE OE AAAAA AAA A A OE OE OE OE AA AAA AAA",
+      "soundboardId": 2
+    },
+    {
+      "name": "Coyote",
+      "quote": "AAAAAAAAAAAAAAAAAAAA",
+      "sound": "https://jonasgamertv.com/uploads/files/coyote.mp3",
+      "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/65415823-1069-4dd1-940f-8c91660cb4a1/dasl6nh-50a15d1e-8b8e-4a5b-99a1-ece61f41a45e.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzY1NDE1ODIzLTEwNjktNGRkMS05NDBmLThjOTE2NjBjYjRhMVwvZGFzbDZuaC01MGExNWQxZS04YjhlLTRhNWItOTlhMS1lY2U2MWY0MWE0NWUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rpW0MIN4vWy4vLe5Hqs_Rq54H-RimObtVJSIL3YJZXY",
+      "soundboardId": "2",
+      "id": 7
+    },
+    {
+      "name": "Coyote",
+      "quote": "AAAAAAAAAAAAAAAAAAAA",
+      "sound": "https://jonasgamertv.com/uploads/files/coyote.mp3",
+      "image": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/65415823-1069-4dd1-940f-8c91660cb4a1/dasl6nh-50a15d1e-8b8e-4a5b-99a1-ece61f41a45e.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzY1NDE1ODIzLTEwNjktNGRkMS05NDBmLThjOTE2NjBjYjRhMVwvZGFzbDZuaC01MGExNWQxZS04YjhlLTRhNWItOTlhMS1lY2U2MWY0MWE0NWUuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.rpW0MIN4vWy4vLe5Hqs_Rq54H-RimObtVJSIL3YJZXY",
+      "soundboardId": "1",
+      "id": 8
+    }
+  ]
+}

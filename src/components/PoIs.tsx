@@ -1,11 +1,20 @@
-import { Box, Fab, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Fab,
+  Grid,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { MapListViewSwitch } from "./form/MapSwitch";
-import { PoICard } from "./PoICard";
-
+import { PoICards } from "./PoICards";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
+import SearchIcon from "@mui/icons-material/Search";
+
 import { useNavigate } from "react-router-dom";
 import { useRides } from "../hooks/useRides";
+import { useState } from "react";
 
 function Item({ children }: { children: React.ReactNode }) {
   return <p>{children}</p>;
@@ -22,8 +31,13 @@ export function PoIs() {
 
   const navigate = useNavigate();
 
+  const [search, setSearch] = useState("");
+
   // Data
   const { isLoading, isError, rides } = useRides();
+  const filteredRides = rides?.filter((ride) =>
+    ride.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div>
@@ -43,12 +57,29 @@ export function PoIs() {
 
       {isLoading ? <p>Loading...</p> : null}
       {isError ? <p>Error!</p> : null}
+
       <Grid container spacing={2}>
-        {rides?.map((ride) => (
-          <Grid key={ride.id} item xs={12} sm={4} md={3}>
-            <PoICard poi={ride} />
-          </Grid>
-        ))}
+        <Grid item xs={3}>
+          <Typography variant="h6">Zoeken & filteren</Typography>
+          <TextField
+            sx={{ marginTop: "1rem" }}
+            id="search"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+            variant="standard"
+            placeholder="Zoek een attractie"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={9}>
+          <PoICards pois={filteredRides!} />
+        </Grid>
       </Grid>
 
       <Fab

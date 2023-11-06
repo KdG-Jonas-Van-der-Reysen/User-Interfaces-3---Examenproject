@@ -9,7 +9,7 @@ import {
 import { PointOfInterest } from "../model/PointOfInterest";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { green } from "@mui/material/colors";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 interface PoICardProps {
   poi: PointOfInterest;
@@ -59,6 +59,22 @@ export function PoICard({ poi }: PoICardProps) {
             />
             <p style={{ color: "red" }}>
               Opent om {poi.openingHours.openTime}
+            </p>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              height: "30px",
+            }}
+          >
+            <PeopleAltIcon
+              className="icon"
+              sx={{ marginRight: "5px" }}
+            />
+            <p>
+              Huidige wachttijd: {poi.currentWaitTime} min
             </p>
           </div>
         </Typography>

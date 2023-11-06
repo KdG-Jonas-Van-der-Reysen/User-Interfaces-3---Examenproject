@@ -1,16 +1,34 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Fab, Typography } from "@mui/material";
 import { MapListViewSwitch } from "./form/MapSwitch";
+
+// Icons
+import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
+import { useRides } from "../hooks/useRides";
 
 function Item({ children }: { children: React.ReactNode }) {
   return <p>{children}</p>;
 }
 
 export function PoIs() {
+  // Styles
+  const makeButtonFloat = {
+    margin: 0,
+    right: 20,
+    bottom: 20,
+    position: "fixed",
+  };
+
+  const navigate = useNavigate();
+
+  // Data
+  const { isLoading, isError, rides } = useRides();
+
   return (
-    <div style={{ marginTop: "2rem" }}>
-      <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+    <div>
+      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5">Ontdek ons park!</Typography>
-        <MapListViewSwitch/>
+        <MapListViewSwitch />
       </Box>
       <Typography variant="h6">
         Ervaar Walibi: Adrenaline en Plezier in één! 🎢🌟
@@ -22,7 +40,20 @@ export function PoIs() {
         verfrissende waterattracties. Veel plezier!
       </p>
 
-    
+      {isLoading ? <p>Loading...</p> : null}
+      {isError ? <p>Error!</p> : null}
+      {rides?.map((ride) => (
+        <p key={ride.id}>{ride.name}</p>
+      ))}
+
+      <Fab
+        variant="extended"
+        sx={makeButtonFloat}
+        onClick={() => navigate("/pois/add")}
+      >
+        <AddIcon sx={{ mr: 1 }} />
+        Toevoegen
+      </Fab>
     </div>
   );
 }

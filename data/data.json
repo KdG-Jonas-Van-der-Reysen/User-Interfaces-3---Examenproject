@@ -1,69 +1,21 @@
 {
   "pointOfInterests": [
     {
-      "id": 1,
-      "name": "Toiletten",
-      "type": "toiletten",
-      "image": "https://google.com",
-      "description": "Hier kun je op je gemak naar het gemak gaan",
-      "tags": ["toilet", "wc"],
-      "openingHours": {
-        "openTime": "10:00",
-        "closeTime": "18:00"
-      },
-      "currentWaitTime": 0,
-      "mapDrawingOptions": {
-        "location": {
-          "x": 0,
-          "y": 0
-        },
-        "size": {
-          "width": 0,
-          "height": 0
-        }
-      },
-      "targetAudience": null,
-      "minLength": null,
-      "similarRides": null
-    },
-    {
-      "id": 2,
-      "name": "N'sos",
-      "type": "restaurant",
-      "image": "https://google.com",
-      "description": "Dompel jezelf onder in de wereld van Exotic World en geniet van heerlijke met kip gerechten. Geniet ook van het sublieme terras van het restaurant met een paranomisch uitzicht op de Kondaa bij Tiki Waka.",
-      "tags": ["eten", "restaurant", "chicken bucket"],
-      "openingHours": {
-        "openTime": "11:00",
-        "closeTime": "15:00"
-      },
-      "currentWaitTime": 0,
-      "mapDrawingOptions": {
-        "location": {
-          "x": 0,
-          "y": 0
-        },
-        "size": {
-          "width": 0,
-          "height": 0
-        }
-      },
-      "targetAudience": null,
-      "minLength": null,
-      "similarRides": null
-    },
-    {
       "id": 3,
       "name": "Silverton",
       "type": "attractie",
       "image": "https://google.com",
       "description": "Klaar om de zwaartekracht te trotseren in de bergen van het Wilde Westen? Opgepast: de stationschef luidt het vertreksein! Klim snel aan boord van je eigen stoomlocomotief en bepaal zelf hoe wild je rit zal worden… Durf jij een bocht aan 90° aan?",
-      "tags": ["attractie", "wild west", "zwaartekracht"],
+      "tags": [
+        "attractie",
+        "wild west",
+        "zwaartekracht"
+      ],
       "openingHours": {
         "openTime": "11:00",
         "closeTime": "15:00"
       },
-      "currentWaitTime": 0,
+      "currentWaitTime": 25,
       "mapDrawingOptions": {
         "location": {
           "x": 0,
@@ -77,6 +29,499 @@
       "targetAudience": "teens",
       "minLength": 130,
       "similarRides": []
+    },
+    {
+      "name": "4D - Los Banditos",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/400x267/public/entertainment/2020-09/4D-ORIGINAL_1280_860PX.jpg?itok=qrpzpFdL",
+      "description": "Het programma van dit jaar in het 4D Theater:\n\nVolg een krankzinnig avontuur van een onhandige sheriff en zijn trouwe stuurman in de jacht op een angstaanjagende bandiet in het Wilde Westen!",
+      "tags": [
+        "4D",
+        "rustig"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "30",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": [
+        "4D",
+        "rustig"
+      ],
+      "id": 4
+    },
+    {
+      "name": "Kondaa",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/400x267/public/entertainment/2021-05/Kondaa-Walibi-Belgium-parc-attractions.jpg?itok=sN9VucYd",
+      "description": "De achtbaan van alle records!\n",
+      "tags": [
+        "snel",
+        "supersnel"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "45",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "adults",
+      "minLength": "130",
+      "similarRides": [
+        "snel",
+        "supersnel"
+      ],
+      "id": 5
+    },
+    {
+      "name": "Kondaala",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2021-05/Kondalaa-Walibi-Belgium-parc-attractions.jpg?itok=v9HDP2d5",
+      "description": "Lekker genieten in de kidsvriendelijke versie van de Kondaa!",
+      "tags": [
+        "ronddraaiend"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "10",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "toddlers",
+      "minLength": 120,
+      "similarRides": [
+        "ronddraaiend"
+      ],
+      "id": 6
+    },
+    {
+      "name": "Buzzsaw",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/walibi%201228.jpg?itok=HGPR5n51",
+      "description": "Kan jij deze doorgedraaide machine aan? Want deze spectaculaire attractie slingert je door het dolle heen in de lucht en boven water.",
+      "tags": [
+        "ronddraaiend"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "47",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "adults",
+      "minLength": "140",
+      "similarRides": [
+        "ronddraaiend"
+      ],
+      "id": 7
+    },
+    {
+      "name": "Calamity Mine",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/Calamity_MD01_.jpg?itok=rDT-h8va",
+      "description": "Het treintje van de Calamity Mine vervoert je eerst 22 meter omhoog in een mijngang. Zet je al maar schrap voor de ongelooflijke reis door de rest van de goudmijn!",
+      "tags": [
+        "mijnkarretje",
+        "familie"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "20",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": [
+        "mijnkarretje",
+        "familie"
+      ],
+      "id": 8
+    },
+    {
+      "name": "Challenge of Tutankhamon",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/cot33.jpg?itok=B9TKJgNq",
+      "description": "Heb je nog geen ervaring met Egyptische sferen? Ontdek er in deze unieke Egyptische tombe alles over. Let wel op, want jij en je team zijn niet de enige aanwezigen.",
+      "tags": [
+        "rustig",
+        "schieten"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "30",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "teens",
+      "minLength": 120,
+      "similarRides": [
+        "rustig",
+        "schieten"
+      ],
+      "id": 9
+    },
+    {
+      "name": "Cobra",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2019-04/Cobra2019-1.jpg?itok=pIkcmVND",
+      "description": "Met zijn langzame start, houdt de Cobra de spanning erin gedurende enkele ogenblikken. Hij laat zijn prooi zo lang mogelijk wachten.",
+      "tags": [
+        "snel",
+        "achtbaan"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "50",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "adults",
+      "minLength": "130",
+      "similarRides": [
+        "snel",
+        "achtbaan"
+      ],
+      "id": 10
+    },
+    {
+      "name": "Dalton Terror",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/dalton_paint-edit.jpg?itok=-el1kQ19",
+      "description": "Nietsvermoedend 77 m kaarsrecht omhoog, genietend van de frisse lucht, van steil gesproken... Alles rondom jou wordt steeds kleiner.",
+      "tags": [
+        "droptower",
+        "hoog",
+        "uitzicht"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": [
+        "droptower",
+        "hoog",
+        "uitzicht"
+      ],
+      "id": 11
+    },
+    {
+      "name": "Dragon boat",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-07/IMG_2095.jpg?itok=lPGXYUSc",
+      "description": "Hijs de zeilen, neem je roeispanen in de hand en vaar over de wilde zee. Trotseer de woeste golven.",
+      "tags": [
+        "kids",
+        "rustig",
+        "draaimolen"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "40",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "toddlers",
+      "minLength": 120,
+      "similarRides": [
+        "kids",
+        "rustig",
+        "draaimolen"
+      ],
+      "id": 12
+    },
+    {
+      "name": "Bubble swirl",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/img_4236.jpg?itok=ayzCEyV4",
+      "description": "Houd je van vliegen? Waag dan je kans in een kleurrijke luchtballon en vlieg de blauwe lucht in.",
+      "tags": [
+        "draaimolen"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "20",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "toddlers",
+      "minLength": "105",
+      "similarRides": [
+        "draaimolen"
+      ],
+      "id": 13
+    },
+    {
+      "name": "Flash Back",
+      "type": "attractie",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/Flash_Back_06.jpg?itok=RRvTFAEa",
+      "description": "De Flash Back is een andere benaming voor een lang parcours in een rustig kabbelend bootje, afgewisseld door hier en daar enkele verraderlijke bochten en korte maar krachtige afdalingen.",
+      "tags": [
+        ""
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": "20",
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": [
+        ""
+      ],
+      "id": 14
+    },
+    {
+      "name": "N'Soso",
+      "type": "restaurant",
+      "image": "https://www.walibi.be/sites/default/files/widget/text_slider/2022-02/N%27Soso%20salle-ronde-restaurant-specialites-poulet-walibi-belgium_1.jpg",
+      "description": "Dompel jezelf onder in de wereld van Exotic World en geniet van heerlijke kipgerechten. Geniet ook van het sublieme terras van het restaurant met een paranomisch uitzicht op de Kondaa bij Tiki Waka.\n",
+      "tags": [
+        "nsoso",
+        "eten",
+        "kip"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": "",
+      "id": 15
+    },
+    {
+      "name": "DELHI'CIOUS",
+      "type": "restaurant",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2022-05/delhicious-1280x600px-page-restaurant.jpg?itok=iQI85TQr",
+      "description": "Dompel jezelf onder in de wereld van Karma World en geniet van heerlijke Indiase gerechten: Chicken Tikka-Masala, Bombay Chicken en nog veel meer. Geniet ook van het sublieme terras van het restaurant met uitzicht op het meer.\n\n",
+      "tags": [
+        "eten",
+        "taco"
+      ],
+      "openingHours": {
+        "openTime": "11:30",
+        "closeTime": "15:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": "",
+      "id": 16
+    },
+    {
+      "name": "Tiki-bar",
+      "type": "foodtruck",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-07/IMG_1690.jpg?itok=0ltvSVML",
+      "description": "Dorst gekregen van de exotische sfeer van Exotic World ? De cocktails en smoothies van de Tiki-Bar zullen voor afkoeling zorgen. Heb je daarna nog een hongertje ? Proef dan zeker van onze heerlijke muffins en nachos.",
+      "tags": [
+        "smoothies",
+        "drinks"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": "",
+      "id": 17
+    },
+    {
+      "name": "Country Cantina",
+      "type": "restaurant",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-07/DSC_0398%20%281%29.JPG?itok=oXVj2DkT",
+      "description": "Echte cowboys houden halt in de selfservice Country Cantina om hun buik te vullen met heerlijke ribbetjes, steaks en Belgische gerechten.\n\n",
+      "tags": [
+        "ribbetjes",
+        "steaks"
+      ],
+      "openingHours": {
+        "openTime": "16:30",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": "",
+      "id": 18
+    },
+    {
+      "name": "Sweet star",
+      "type": "foodtruck",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-07/DSC_0373.JPG?itok=88EVRowg",
+      "description": "Een lekkere wafel of ijsje om je hongerige maag te stillen ? Bij Sweet Star is alles klaar om je vlug te bedienen !\n\n",
+      "tags": [
+        "ijsjes"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 0,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "targetAudience": "all",
+      "minLength": 120,
+      "similarRides": "",
+      "id": 19
     }
   ]
 }

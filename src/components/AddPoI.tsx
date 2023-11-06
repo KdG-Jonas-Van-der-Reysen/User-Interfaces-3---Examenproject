@@ -15,14 +15,9 @@ import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 import { Controller, useForm } from "react-hook-form";
 import { RideData } from "../model/Ride";
+import { useRides } from "../hooks/useRides";
+import { useNavigate } from "react-router-dom";
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#f7f5f5",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
 
 export function AddPoI() {
   const {
@@ -60,15 +55,25 @@ export function AddPoI() {
     },
   });
 
+  const { addRide } = useRides();
+  const navigate = useNavigate();
+
   const watchType = watch("type", "attractie");
+  const watchOpenTime = watch("openingHours.openTime", "10:00");
 
   return (
     <div style={{ marginBottom: "100px" }}>
       <Typography variant="h6">Point of Interest toevoegen</Typography>
-      <form>
+      <form
+        onSubmit={handleSubmit((data) => {
+          addRide(data);
+          navigate("/");
+          reset();
+        })}
+      >
         <Box sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
           <p style={{ fontWeight: "bold", marginBottom: 0 }}>
-            Algemene informatie
+            Algemene informatie {watchOpenTime}
           </p>
 
           {/* Type*/}
@@ -122,6 +127,22 @@ export function AddPoI() {
                 label="Beschrijving"
                 error={!!errors.description}
                 helperText={errors.description?.message}
+                fullWidth
+              />
+            )}
+          />
+
+          {/* Image */}
+          <Controller
+            name="image"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                style={{ display: "block" }}
+                label="Afbeelding"
+                error={!!errors.image}
+                helperText={errors.image?.message}
                 fullWidth
               />
             )}
@@ -241,11 +262,10 @@ export function AddPoI() {
               name="openingHours.openTime"
               control={control}
               render={({ field }) => (
-                <TimeField
+                <TextField
                   {...field}
-                  style={{ display: "block" }}
                   label="Openingsuur"
-                  format="hh:mm"
+                  error={!!errors.openingHours?.openTime}
                   helperText={errors.openingHours?.openTime?.message}
                 />
               )}
@@ -254,11 +274,10 @@ export function AddPoI() {
               name="openingHours.closeTime"
               control={control}
               render={({ field }) => (
-                <TimeField
+                <TextField
                   {...field}
-                  style={{ display: "block" }}
                   label="Sluitingsuur"
-                  format="hh:mm"
+                  error={!!errors.openingHours?.closeTime}
                   helperText={errors.openingHours?.closeTime?.message}
                 />
               )}
@@ -352,6 +371,13 @@ export function AddPoI() {
               </Box>
             </Grid>
           </Grid>
+
+          {/* Submit */}
+          <button
+            type="submit"
+          >
+            Toevoegen
+          </button>
         </Box>
       </form>
     </div>

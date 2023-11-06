@@ -1,5 +1,6 @@
-import { Box, Fab, Typography } from "@mui/material";
+import { Box, Fab, Grid, Typography } from "@mui/material";
 import { MapListViewSwitch } from "./form/MapSwitch";
+import { PoICard } from "./PoICard";
 
 // Icons
 import AddIcon from "@mui/icons-material/Add";
@@ -42,9 +43,13 @@ export function PoIs() {
 
       {isLoading ? <p>Loading...</p> : null}
       {isError ? <p>Error!</p> : null}
-      {rides?.map((ride) => (
-        <p key={ride.id}>{ride.name}</p>
-      ))}
+      <Grid container spacing={2}>
+        {rides?.map((ride) => (
+          <Grid key={ride.id} item xs={12} sm={4} md={3}>
+            <PoICard poi={ride} />
+          </Grid>
+        ))}
+      </Grid>
 
       <Fab
         variant="extended"

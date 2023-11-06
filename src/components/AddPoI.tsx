@@ -14,9 +14,10 @@ import {
 import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 import { Controller, useForm } from "react-hook-form";
-import { RideData } from "../model/Ride";
+import { Ride, RideData } from "../model/Ride";
 import { useRides } from "../hooks/useRides";
 import { useNavigate } from "react-router-dom";
+import { PointOfInterest } from "../model/PointOfInterest";
 
 
 export function AddPoI() {
@@ -66,6 +67,39 @@ export function AddPoI() {
       <Typography variant="h6">Point of Interest toevoegen</Typography>
       <form
         onSubmit={handleSubmit((data) => {
+          if(data.type == "attractie") {
+            const ride :Omit<Ride, "id"> = {
+              ...data,
+              tags: data.tags.split(","),
+              similarRides: data.similarRides.split(","),
+            }
+            addRide(ride);
+          } else {
+            const poi :Omit<PointOfInterest, "id"> = {
+              name: data.name,
+              type: data.type,
+              image: data.image,
+              description: data.description,
+              tags: data.tags.split(","),
+              openingHours: {
+                openTime: data.openingHours.openTime,
+                closeTime: data.openingHours.closeTime,
+              },
+              currentWaitTime: data.currentWaitTime,
+              mapDrawingOptions: {
+                location: {
+                  x: data.mapDrawingOptions.location.x,
+                  y: data.mapDrawingOptions.location.y,
+                },
+                size: {
+                  width: data.mapDrawingOptions.size.width,
+                  height: data.mapDrawingOptions.size.height,
+                },
+              },
+              
+            }
+            addRide(poi);
+          }
           addRide(data);
           navigate("/");
           reset();

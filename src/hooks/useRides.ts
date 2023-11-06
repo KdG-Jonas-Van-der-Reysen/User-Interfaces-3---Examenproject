@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createRide, getRides } from "../services/RideDataService";
-import { RideData } from "../model/Ride";
+import { PointOfInterest } from "../model/PointOfInterest";
 
 export function useRides() {
     const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ export function useRides() {
         mutate: addRide,
         isLoading: isAddingRide,
         isError: isErrorAddingRide,
-    } = useMutation((ride: RideData) => createRide(ride), {
+    } = useMutation((poi: Omit<PointOfInterest, "id">) => createRide(poi), {
         onSuccess: () => {
             queryClient.invalidateQueries(['rides'])
         }

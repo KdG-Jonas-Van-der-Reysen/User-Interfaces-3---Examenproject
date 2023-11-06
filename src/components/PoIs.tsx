@@ -1,8 +1,13 @@
 import {
   Box,
+  Divider,
   Fab,
+  FormControl,
   Grid,
   InputAdornment,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
@@ -15,10 +20,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useNavigate } from "react-router-dom";
 import { useRides } from "../hooks/useRides";
 import { useState } from "react";
-
-function Item({ children }: { children: React.ReactNode }) {
-  return <p>{children}</p>;
-}
+import { PointOfInterest } from "../model/PointOfInterest";
+import { Ride } from "../model/Ride";
 
 export function PoIs() {
   // Styles
@@ -32,12 +35,27 @@ export function PoIs() {
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("all");
+  const [audienceFilter, setAudienceFilter] = useState("all");
 
   // Data
   const { isLoading, isError, rides } = useRides();
-  const filteredRides = rides?.filter((ride) =>
-    ride.name.toLowerCase().includes(search.toLowerCase())
-  );
+
+  // Filtering
+  let filteredPois: (PointOfInterest | Ride)[] = [];
+
+  if (!isLoading && !isError && rides) {
+    filteredPois = rides
+      // Filter for search
+      .filter((poi) => poi.name.toLowerCase().includes(search.toLowerCase()))
+      // Filter for type
+      .filter((poi) => typeFilter == "all" || poi.type == typeFilter)
+      // Filter for audience
+   
+  }
+
+  if (typeFilter !== "all")
+    filteredPois = filteredPois?.filter((ride) => ride.type === typeFilter);
 
   return (
     <div>
@@ -60,25 +78,81 @@ export function PoIs() {
 
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <Typography variant="h6">Zoeken & filteren</Typography>
-          <TextField
-            sx={{ marginTop: "1rem" }}
-            id="search"
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "1rem",
+              paddingRight: "1rem",
             }}
-            variant="standard"
-            placeholder="Zoek een attractie"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          >
+            <Typography variant="h6">Zoeken & filteren</Typography>
+
+            {/* Search*/}
+            <TextField
+              fullWidth
+              sx={{ marginTop: "1rem" }}
+              id="search"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              variant="standard"
+              placeholder="Zoek een attractie"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {/* Filter on type */}
+            <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+              <InputLabel id="poi-type-filter">
+                Wat voor iets zoek je?
+              </InputLabel>
+              <Select
+                labelId="poi-type-filter"
+                id="demo-simple-select"
+                value={typeFilter}
+                label="POI type filter"
+                size="small"
+                onChange={(e) => setTypeFilter(e.target.value as string)}
+              >
+                <MenuItem value="all">Alles</MenuItem>
+                <MenuItem value="attractie">Attractie</MenuItem>
+                <MenuItem value="toiletten">Toiletten</MenuItem>
+                <MenuItem value="restaurant">Restaurant</MenuItem>
+                <MenuItem value="foodtruck">Foodtruck</MenuItem>
+                <MenuItem value="lockers">Lockers</MenuItem>
+                <MenuItem value="winkel">Winkel</MenuItem>
+              </Select>
+            </FormControl>
+
+            {/* Filter on audience */}
+            <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+              <InputLabel id="poi-type-filter">
+                Wat voor iets zoek je?
+              </InputLabel>
+              <Select
+                labelId="poi-type-filter"
+                id="demo-simple-select"
+                value={audienceFilter}
+                label="POI type filter"
+                size="small"
+                onChange={(e) => setAudienceFilter(e.target.value as string)}
+              >
+                <MenuItem value="all">Alles</MenuItem>
+                <MenuItem value="toddlers">Kleuters</MenuItem>
+                <MenuItem value="teens">Tieners</MenuItem>
+                <MenuItem value="adults">Volwassenen</MenuItem>
+                <MenuItem value="all">Iedereen</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Grid>
         <Grid item xs={9}>
-          <PoICards pois={filteredRides!} />
+          <PoICards pois={filteredPois!} />
         </Grid>
       </Grid>
 

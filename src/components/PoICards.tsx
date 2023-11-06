@@ -6,11 +6,11 @@ import { Ride } from "../model/Ride";
 export function PoICards({ pois }: { pois: (PointOfInterest | Ride)[] }) {
   return (
     <Grid container spacing={2} sx={{ paddingTop: "2rem" }}>
-      {pois?.map((poi) => (
-        <Grid key={poi.id} item xs={12} sm={4} md={3}>
+      {(pois?.length > 0) ? pois?.map((poi) => (
+        <Grid key={poi.id} item xs={12} sm={4} lg={3}>
           <PoICard poi={poi} />
         </Grid>
-      ))}
+      )): <p>Geen resultaten gevonden</p>}
     </Grid>
   );
 }

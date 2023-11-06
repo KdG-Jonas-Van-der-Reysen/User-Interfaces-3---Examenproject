@@ -403,9 +403,6 @@
           "height": 15
         }
       },
-      "targetAudience": "all",
-      "minLength": 120,
-      "similarRides": "",
       "id": 15
     },
     {
@@ -432,9 +429,6 @@
           "height": 15
         }
       },
-      "targetAudience": "all",
-      "minLength": 120,
-      "similarRides": "",
       "id": 16
     },
     {
@@ -461,9 +455,6 @@
           "height": 15
         }
       },
-      "targetAudience": "all",
-      "minLength": 120,
-      "similarRides": "",
       "id": 17
     },
     {
@@ -490,9 +481,6 @@
           "height": 15
         }
       },
-      "targetAudience": "all",
-      "minLength": 120,
-      "similarRides": "",
       "id": 18
     },
     {
@@ -518,9 +506,6 @@
           "height": 15
         }
       },
-      "targetAudience": "all",
-      "minLength": 120,
-      "similarRides": "",
       "id": 19
     }
   ]

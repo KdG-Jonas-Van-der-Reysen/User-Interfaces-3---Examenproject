@@ -1,7 +1,6 @@
-import { PoIType } from "./../model/PointOfInterest";
 import axios from "axios";
 import { PointOfInterest } from "../model/PointOfInterest";
-import { Ride, RideData } from "../model/Ride";
+import { Ride } from "../model/Ride";
 
 export async function getRides() {
   const points = await axios.get<(PointOfInterest | Ride)[]>(
@@ -10,19 +9,24 @@ export async function getRides() {
   return points.data;
 }
 
-export async function createRide(ride: RideData) {
-  if (ride.type == "attractie") {
-    const newRide: Omit<Ride, "id"> = {
-      ...ride,
-      tags: ride.tags.split(","),
-      similarRides: ride.tags.split(","),
+export async function createRide(poiOrRide: Omit<PointOfInterest, "id">) {
+  if (poiOrRide.type !== "attractie") {
+    console.log("I AM NOT A RIDE");
+    const poi: Omit<PointOfInterest, "id"> = {
+      name: poiOrRide.name,
+      type: poiOrRide.type,
+      image: poiOrRide.image,
+      description: poiOrRide.description,
+      tags: poiOrRide.tags,
+      openingHours: poiOrRide.openingHours,
+      currentWaitTime: poiOrRide.currentWaitTime,
+      mapDrawingOptions: poiOrRide.mapDrawingOptions,
     };
-    return axios.post<PointOfInterest | Ride>(`/pointOfInterests`, newRide);
+
+    console.log("POI", poi);
+    return axios.post<PointOfInterest | Ride>(`/pointOfInterests`, poi);
   } else {
-    const newPoint: Omit<PointOfInterest, "id"> = {
-      ...ride,
-      tags: ride.tags.split(","),
-    };
-    return axios.post<PointOfInterest | Ride>(`/pointOfInterests`, newPoint);
+    return axios.post<PointOfInterest | Ride>(`/pointOfInterests`, poiOrRide);
   }
+  
 }

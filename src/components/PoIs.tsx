@@ -18,7 +18,7 @@ import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { useNavigate } from "react-router-dom";
-import { useRides } from "../hooks/useRides";
+import { usePointOfInterests } from "../hooks/usePointOfInterests";
 import { useState } from "react";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
@@ -39,7 +39,7 @@ export function PoIs() {
   const [audienceFilter, setAudienceFilter] = useState("all");
 
   // Data
-  const { isLoading, isError, rides } = useRides();
+  const { isLoading, isError, rides } = usePointOfInterests();
 
   // Filtering
   let filteredPois: (PointOfInterest | Ride)[] = [];
@@ -51,7 +51,13 @@ export function PoIs() {
       // Filter for type
       .filter((poi) => typeFilter == "all" || poi.type == typeFilter)
       // Filter for audience
-   
+      .filter(
+        (poi) =>
+          audienceFilter == "all" ||
+          poi.type != "attractie" ||
+          (poi.type == "attractie" &&
+            (poi as Ride).targetAudience == audienceFilter)
+      );
   }
 
   if (typeFilter !== "all")
@@ -82,7 +88,7 @@ export function PoIs() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "1rem",
+              gap: "0.25rem",
               paddingRight: "1rem",
             }}
           >
@@ -130,25 +136,25 @@ export function PoIs() {
             </FormControl>
 
             {/* Filter on audience */}
-            <FormControl fullWidth sx={{ marginTop: "2rem" }}>
-              <InputLabel id="poi-type-filter">
-                Wat voor iets zoek je?
-              </InputLabel>
-              <Select
-                labelId="poi-type-filter"
-                id="demo-simple-select"
-                value={audienceFilter}
-                label="POI type filter"
-                size="small"
-                onChange={(e) => setAudienceFilter(e.target.value as string)}
-              >
-                <MenuItem value="all">Alles</MenuItem>
-                <MenuItem value="toddlers">Kleuters</MenuItem>
-                <MenuItem value="teens">Tieners</MenuItem>
-                <MenuItem value="adults">Volwassenen</MenuItem>
-                <MenuItem value="all">Iedereen</MenuItem>
-              </Select>
-            </FormControl>
+            {(typeFilter == "attractie" || typeFilter == "all") && (
+              <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+                <InputLabel id="poi-type-filter">Voor wie?</InputLabel>
+                <Select
+                  labelId="poi-type-filter"
+                  id="demo-simple-select"
+                  value={audienceFilter}
+                  label="POI type filter"
+                  size="small"
+                  onChange={(e) => setAudienceFilter(e.target.value as string)}
+                >
+                  <MenuItem value="all">Alles</MenuItem>
+                  <MenuItem value="toddlers">Kleuters</MenuItem>
+                  <MenuItem value="teens">Tieners</MenuItem>
+                  <MenuItem value="adults">Volwassenen</MenuItem>
+                  <MenuItem value="all">Iedereen</MenuItem>
+                </Select>
+              </FormControl>
+            )}
           </Box>
         </Grid>
         <Grid item xs={9}>

@@ -11,6 +11,7 @@ import axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { deDE } from "@mui/x-date-pickers/locales";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { PoiDetail } from "./components/PoIDetail";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
@@ -31,6 +32,7 @@ function App() {
             <Container sx={{ marginTop: "2rem", minHeight: 'calc(100vh - 175px)'}}>
               <Routes>
                 <Route path="/pois" element={<PoIs />} />
+                <Route path="/pois/:id" element={<PoiDetail />} />
                 <Route path="/" element={<PoIs />} />
                 <Route path="/pois/add" element={<AddPoI />} />
               </Routes>

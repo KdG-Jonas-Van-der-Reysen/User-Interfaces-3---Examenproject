@@ -15,10 +15,10 @@ import { TimeField } from "@mui/x-date-pickers/TimeField";
 
 import { Controller, useForm } from "react-hook-form";
 import { Ride, RideData } from "../model/Ride";
-import { useRides } from "../hooks/useRides";
+import { usePointOfInterests } from "../hooks/usePointOfInterests";
 import { useNavigate } from "react-router-dom";
 import { PointOfInterest } from "../model/PointOfInterest";
-
+import { Breacrumbs } from "./navigation/Breacrumbs";
 
 export function AddPoI() {
   const {
@@ -56,7 +56,7 @@ export function AddPoI() {
     },
   });
 
-  const { addRide } = useRides();
+  const { addRide } = usePointOfInterests();
   const navigate = useNavigate();
 
   const watchType = watch("type", "attractie");
@@ -64,18 +64,20 @@ export function AddPoI() {
 
   return (
     <div style={{ marginBottom: "100px" }}>
+      <Breacrumbs currentPageTitle="Toevoegen" />
+
       <Typography variant="h6">Point of Interest toevoegen</Typography>
       <form
         onSubmit={handleSubmit((data) => {
-          if(data.type == "attractie") {
-            const ride :Omit<Ride, "id"> = {
+          if (data.type == "attractie") {
+            const ride: Omit<Ride, "id"> = {
               ...data,
               tags: data.tags.split(","),
               similarRides: data.similarRides.split(","),
-            }
+            };
             addRide(ride);
           } else {
-            const poi :Omit<PointOfInterest, "id"> = {
+            const poi: Omit<PointOfInterest, "id"> = {
               name: data.name,
               type: data.type,
               image: data.image,
@@ -96,8 +98,7 @@ export function AddPoI() {
                   height: data.mapDrawingOptions.size.height,
                 },
               },
-              
-            }
+            };
             addRide(poi);
           }
           addRide(data);
@@ -407,11 +408,7 @@ export function AddPoI() {
           </Grid>
 
           {/* Submit */}
-          <button
-            type="submit"
-          >
-            Toevoegen
-          </button>
+          <button type="submit">Toevoegen</button>
         </Box>
       </form>
     </div>

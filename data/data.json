@@ -509,6 +509,39 @@
         }
       },
       "id": 19
+    },
+    {
+      "name": "Typhoon",
+      "type": "attractie",
+      "description": "Duistere krachten in Land of Legends wekten een eeuwige Typhoon op. De wervelwind brengt het hele rijk met al haar elementen in gevaar. De Guardian of Elements en de Skyriders werken samen om heks Wayra te vinden, maar ze hebben hulp nodig. Spring in de koets van de Skyriders, vlieg met hen mee en duik 25 meter het diepe in. Help jij heks Wayra in te tomen?",
+      "image": "https://www.bobbejaanland.be/content/bjl/be/tickets/extras/speedy-pass/_jcr_content/responsiveGrid/cc18_columns/col_2/ca03_image.coreimg.jpeg/1681453557835/speedy-pass-2023.jpeg",
+      "openingHours": {
+        "openTime": "13:00",
+        "closeTime": "18:00"
+      },
+      "tagsStr": "snel,rollercoaster",
+      "currentWaitTime": 76,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        }
+      },
+      "minLength": 150,
+      "similarRidesStr": "",
+      "targetAudience": "adults",
+      "tags": [
+        "snel",
+        "rollercoaster"
+      ],
+      "similarRides": [
+        ""
+      ],
+      "id": 20
     }
   ]
 }

@@ -240,15 +240,15 @@ export function PoIForm({ poi }: PoIFormProps) {
 
         {/* Tags */}
         <Controller
-          name="tags"
+          name="tagsStr"
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
               style={{ display: "block" }}
               label="Tags (door komma gescheiden)"
-              error={!!errors.tags}
-              helperText={errors.tags?.message}
+              error={!!errors.tagsStr}
+              helperText={errors.tagsStr?.message}
               fullWidth
             />
           )}
@@ -322,15 +322,15 @@ export function PoIForm({ poi }: PoIFormProps) {
             <p style={{ fontWeight: "bold" }}>Gelijkaardige attracties</p>
 
             <Controller
-              name="similarRides"
+              name="similarRidesStr"
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
                   style={{ display: "block" }}
                   label="Gelijkaardige attractie ID's (door komma gescheiden)"
-                  error={!!errors.similarRides}
-                  helperText={errors.similarRides?.message}
+                  error={!!errors.similarRidesStr}
+                  helperText={errors.similarRidesStr?.message}
                   fullWidth
                 />
               )}

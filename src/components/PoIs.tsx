@@ -22,6 +22,7 @@ import { usePointOfInterests } from "../hooks/usePointOfInterests";
 import { useState } from "react";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
+import { PoIMap } from "./PoIMap";
 
 export function PoIs() {
   // Styles
@@ -37,6 +38,7 @@ export function PoIs() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [audienceFilter, setAudienceFilter] = useState("all");
+  const [showMap, setShowMap] = useState(false);
 
   // Data
   const { isLoading, isError, rides } = usePointOfInterests();
@@ -67,7 +69,7 @@ export function PoIs() {
     <div>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography variant="h5">Ontdek ons park!</Typography>
-        <MapListViewSwitch />
+        <MapListViewSwitch showMap={showMap} setShowMap={setShowMap} />
       </Box>
       <Typography variant="h6">
         Ervaar Walibi: Adrenaline en Plezier in één! 🎢🌟
@@ -158,7 +160,7 @@ export function PoIs() {
           </Box>
         </Grid>
         <Grid item xs={9}>
-          <PoICards pois={filteredPois!} />
+          {showMap ? <PoIMap pois={filteredPois!} /> : <PoICards pois={filteredPois!} />}
         </Grid>
       </Grid>
 

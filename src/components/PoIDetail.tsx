@@ -4,6 +4,7 @@ import { usePointOfInterest } from "../hooks/usePointOfInterest";
 import { Breacrumbs } from "./navigation/Breacrumbs";
 import { IconText } from "./IconText";
 import { Ride } from "../model/Ride";
+import { PoIMap } from "./PoIMap";
 
 export function PoiDetail() {
   const { id } = useParams();
@@ -99,6 +100,8 @@ export function PoiDetail() {
             <p></p>
           </Grid>
         </Grid>
+
+        <PoIMap pois={[poi]}/>
       </Box>
     </div>
   );

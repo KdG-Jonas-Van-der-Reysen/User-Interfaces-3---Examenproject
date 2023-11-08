@@ -12,7 +12,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     "&.Mui-checked": {
       transform: "translateX(22px)",
       "& .MuiSwitch-thumb:before": {
-        backgroundImage: 'url("/src/assets/icons/list.svg")',
+        backgroundImage: 'url("/src/assets/icons/map.svg")',
       },
       "& + .MuiSwitch-track": {
         opacity: 1,
@@ -33,7 +33,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
       top: 0,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center",
-      backgroundImage: 'url("/src/assets/icons/map.svg")',
+      backgroundImage: 'url("/src/assets/icons/list.svg")',
       backgroundColor: "transparent",
     },
   },
@@ -44,11 +44,16 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export function MapListViewSwitch() {
+interface MapListViewSwitchProps {
+  showMap: boolean;
+  setShowMap: (showMap: boolean) => void;
+}
+
+export function MapListViewSwitch({ showMap, setShowMap}: MapListViewSwitchProps) {
   return (
     <FormGroup sx={{float: 'right'}}>
       <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} defaultChecked />}
+        control={<MaterialUISwitch sx={{ m: 1 }} value={showMap} onChange={(e) => setShowMap(e.target.checked)} />}
         label=""
       />
     </FormGroup>

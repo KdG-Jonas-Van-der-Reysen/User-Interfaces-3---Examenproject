@@ -1,7 +1,6 @@
 {
   "pointOfInterests": [
     {
-      "id": 3,
       "name": "Silverton",
       "type": "attractie",
       "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2023-03/walibi%20concept%20-%20site%20web-1280x680.jpg?itok=GbvRASli",
@@ -27,8 +26,11 @@
         }
       },
       "targetAudience": "teens",
-      "minLength": 130,
-      "similarRides": []
+      "minLength": "130",
+      "similarRides": [
+        ""
+      ],
+      "id": 3
     },
     {
       "name": "4D - Los Banditos",

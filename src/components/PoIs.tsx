@@ -19,12 +19,16 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { useNavigate } from "react-router-dom";
 import { usePointOfInterests } from "../hooks/usePointOfInterests";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
 import { PoIMap } from "./PoIMap";
+import AuthContext from "../contexts/AuthContext";
 
 export function PoIs() {
+  const { user } = useContext(AuthContext)
+
+  
   // Styles
   const makeButtonFloat = {
     margin: 0,
@@ -41,7 +45,7 @@ export function PoIs() {
   const [showMap, setShowMap] = useState(false);
 
   // Data
-  const { isLoading, isError, rides } = usePointOfInterests();
+  const { isLoading, isError, pointOfInterests: rides } = usePointOfInterests();
 
   // Filtering
   let filteredPois: (PointOfInterest | Ride)[] = [];
@@ -164,14 +168,14 @@ export function PoIs() {
         </Grid>
       </Grid>
 
-      <Fab
+      {(!!user && user.isAdmin) && <Fab
         variant="extended"
         sx={makeButtonFloat}
         onClick={() => navigate("/pois/add")}
       >
         <AddIcon sx={{ mr: 1 }} />
         Toevoegen
-      </Fab>
+      </Fab>}
     </div>
   );
 }

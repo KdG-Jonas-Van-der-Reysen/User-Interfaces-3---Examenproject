@@ -23,7 +23,8 @@ export function usePointOfInterest(id: string) {
     (poi: Omit<PointOfInterest, "id">) => updatePointOfInterest(id, poi),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["poi", id]);
+        queryClient.invalidateQueries(["pointOfInterests", id]);
+        queryClient.invalidateQueries(["pointOfInterests"])
       },
     }
   );

@@ -7,24 +7,30 @@ import { PointOfInterest } from "../model/PointOfInterest";
 
 export function usePointOfInterests() {
   const queryClient = useQueryClient();
-  const { isLoading, isError, data: rides } = useQuery(["rides"], getPointOfInterests);
+  const {
+    isLoading,
+    isError,
+    data: pointOfInterests,
+  } = useQuery(["pointOfInterests"], getPointOfInterests);
 
   const {
-    mutate: addRide,
-    isLoading: isAddingRide,
-    isError: isErrorAddingRide,
-  } = useMutation((poi: Omit<PointOfInterest, "id">) => createPointOfInterest(poi), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(["rides"]);
-    },
-  });
+    mutate: addPointOfInterest,
+    isLoading: isAddingPointOfInterest,
+    isError: isErrorAddingPointOfInterest,
+  } = useMutation(
+    (poi: Omit<PointOfInterest, "id">) => createPointOfInterest(poi),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["pointOfInterests"]);
+      },
+    }
+  );
   return {
     isLoading,
     isError,
-    rides,
-    addRide,
-    isAddingRide,
-    isErrorAddingRide,
+    pointOfInterests,
+    addPointOfInterest,
+    isAddingPointOfInterest,
+    isErrorAddingPointOfInterest,
   };
 }
-

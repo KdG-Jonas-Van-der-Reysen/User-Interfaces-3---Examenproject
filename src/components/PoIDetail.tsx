@@ -1,14 +1,28 @@
-import { Box, Breadcrumbs, Chip, Grid, Link, Typography } from "@mui/material";
+import { Box, Chip, Fab, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { usePointOfInterest } from "../hooks/usePointOfInterest";
 import { Breacrumbs } from "./navigation/Breacrumbs";
-import { IconText } from "./IconText";
 import { Ride } from "../model/Ride";
 import { PoIMap } from "./PoIMap";
+import { useContext } from "react";
+import AuthContext from "../contexts/AuthContext";
 
-export function PoiDetail() {
+// Icons
+import CreateIcon from '@mui/icons-material/Create';
+
+export function PoIDetail() {
   const { id } = useParams();
   const { isLoading, isError, pointOfInterest: poi } = usePointOfInterest(id!);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // Styles
+  const makeButtonFloat = {
+    margin: 0,
+    right: 20,
+    bottom: 20,
+    position: "fixed",
+  };
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error</p>;
@@ -101,7 +115,17 @@ export function PoiDetail() {
           </Grid>
         </Grid>
 
-        <PoIMap pois={[poi]}/>
+        <PoIMap pois={[poi]} />
+        {!!user && user.isAdmin && (
+          <Fab
+            variant="extended"
+            sx={makeButtonFloat}
+            onClick={() => navigate(`/pois/${poi.id}/edit`)}
+          >
+            <CreateIcon sx={{ mr: 1 }} />
+            Bewerken
+          </Fab>
+        )}
       </Box>
     </div>
   );

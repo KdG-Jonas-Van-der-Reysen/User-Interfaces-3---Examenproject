@@ -7,12 +7,55 @@ import {
   TextField,
 } from "@mui/material";
 
+import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { Ride, RideData } from "../model/Ride";
 import { usePointOfInterests } from "../hooks/usePointOfInterests";
 import { useNavigate } from "react-router-dom";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { usePointOfInterest } from "../hooks/usePointOfInterest";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+// Define a partial validation schema for the properties that need validation
+const poiSchema: z.ZodType<Partial<RideData>> = z.object({
+  name: z.string().min(3, "Geef aub een naam van minstens 3 karakters"),
+  type: z.enum(["attractie", "toiletten", "restaurant", "foodtruck", "lockers", "winkel"]),
+  description: z.string(),
+  image: z.string().url("Vul aub een geldige URL in"),
+  openingHours: z.object({
+    openTime: z
+      .string()
+      .regex(
+        /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+        "Vul aub een geldig uur in (uu:mm)"
+      ),
+    closeTime: z
+      .string()
+      .regex(
+        /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/,
+        "Vul aub een geldig uur in (uu:mm)"
+      ),
+  }),
+  tagsStr: z.string(),
+  currentWaitTime: z.coerce.number(),
+  mapDrawingOptions: z.object({
+    location: z.object({
+      x: z.coerce.number().gte(0, "X moet groter of gelijk aan 0 zijn"),
+      y: z.coerce.number().gte(0, "Y moet groter of gelijk aan 0 zijn"),
+    }),
+    size: z.object({
+      width: z.coerce
+        .number()
+        .gte(0, "Breedte moet groter of gelijk aan 0 zijn"),
+      height: z.coerce
+        .number()
+        .gte(0, "Hoogte moet groter of gelijk aan 0 zijn"),
+    }),
+  }),
+  minLength: z.coerce.number().gte(100, "Minimum lengte moet groter of gelijk aan 100 cm zijn"),
+  similarRidesStr: z.string(),
+  targetAudience: z.enum(["toddlers", "teens", "adults", "all"]),
+});
 
 interface PoIFormProps {
   poi?: PointOfInterest | Ride;
@@ -25,13 +68,13 @@ export function PoIForm({ poi }: PoIFormProps) {
     control,
     watch,
   } = useForm<RideData>({
-    //resolver: zodResolver(itemSchema),
+    resolver: zodResolver(poiSchema),
     defaultValues: {
       name: poi?.name || "",
       type: poi?.type || "attractie",
       image: poi?.image || "",
       description: poi?.description || "",
-      tags: poi ? poi.tags.join(",") : "",
+      tagsStr: poi ? poi.tags.join(",") : "",
       openingHours: poi?.openingHours || {
         openTime: "10:00",
         closeTime: "20:00",
@@ -49,7 +92,7 @@ export function PoIForm({ poi }: PoIFormProps) {
       },
       targetAudience: (poi as Ride)?.targetAudience || "all",
       minLength: (poi as Ride)?.minLength || 120,
-      similarRides: (poi as Ride)?.similarRides?.join(',') || "",
+      similarRidesStr: (poi as Ride)?.similarRides?.join(",") || "",
     },
   });
 
@@ -70,12 +113,12 @@ export function PoIForm({ poi }: PoIFormProps) {
           console.log("adding ride");
           const ride: Omit<Ride, "id"> = {
             ...data,
-            tags: data.tags.split(","),
-            similarRides: data.similarRides.split(","),
+            tags: data.tagsStr.split(","),
+            similarRides: data.similarRidesStr.split(","),
           };
           console.log("ride", ride);
-          if(isEdit) {
-            editPointOfInterest(ride)
+          if (isEdit) {
+            editPointOfInterest(ride);
           } else {
             addPointOfInterest(ride);
           }
@@ -86,7 +129,7 @@ export function PoIForm({ poi }: PoIFormProps) {
             type: data.type,
             image: data.image,
             description: data.description,
-            tags: data.tags.split(","),
+            tags: data.tagsStr.split(","),
             openingHours: {
               openTime: data.openingHours.openTime,
               closeTime: data.openingHours.closeTime,
@@ -104,13 +147,13 @@ export function PoIForm({ poi }: PoIFormProps) {
             },
           };
           console.log("poi", poi);
-          if(isEdit) {
-            editPointOfInterest(poi)
+          if (isEdit) {
+            editPointOfInterest(poi);
           } else {
             addPointOfInterest(poi);
           }
         }
-        if(isEdit) {
+        if (isEdit) {
           navigate(`/pois/${id}`);
         } else {
           navigate("/");
@@ -348,6 +391,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 control={control}
                 render={({ field }) => (
                   <TextField
+                    type="number"
                     {...field}
                     style={{ display: "block" }}
                     label="X"
@@ -362,6 +406,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    required
                     style={{ display: "block" }}
                     label="Y"
                     error={!!errors.mapDrawingOptions?.location?.y}
@@ -387,6 +432,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    required
                     style={{ display: "block" }}
                     label="Breedte"
                     error={!!errors.mapDrawingOptions?.size?.width}
@@ -400,6 +446,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 render={({ field }) => (
                   <TextField
                     {...field}
+                    required
                     style={{ display: "block" }}
                     label="Hoogte"
                     error={!!errors.mapDrawingOptions?.size?.height}

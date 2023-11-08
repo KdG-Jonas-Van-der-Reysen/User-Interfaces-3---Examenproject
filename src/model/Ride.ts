@@ -9,6 +9,6 @@ export interface Ride extends PointOfInterest {
 export type TargetAudienceType = 'toddlers'|'teens'| 'adults'|'all'
 
 export type RideData = Omit<Ride, "id"> & {
-    tags: string,
-    similarRides: string,
+    tagsStr: string,
+    similarRidesStr: string,
 }

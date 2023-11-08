@@ -12,17 +12,15 @@ export interface PointOfInterest {
     closeTime: string; // HH:mm
   };
   currentWaitTime: number; // in minutes
-  mapDrawingOptions: MapDrawingOptions;
-}
-
-export interface MapDrawingOptions {
-  location: {
-    x: number;
-    y: number;
-  };
-  size: {
-    width: number;
-    height: number;
+  mapDrawingOptions: {
+    location: {
+      x: number;
+      y: number;
+    };
+    size: {
+      width: number;
+      height: number;
+    };
   };
 }
 

@@ -1,9 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
+  deletePointOfInterest,
   getPointOfInterest,
   updatePointOfInterest,
 } from "../services/PointOfInterestDataService";
-import { PointOfInterest } from "../model/PointOfInterest";
+import { PointOfInterest, isPoIOpen } from "../model/PointOfInterest";
+import { Ride } from "../model/Ride";
 
 export function usePointOfInterest(id: string) {
   const queryClient = useQueryClient();
@@ -15,6 +17,7 @@ export function usePointOfInterest(id: string) {
     return getPointOfInterest(id);
   });
 
+  // Edit point of interest
   const {
     mutate: editPointOfInterest,
     isLoading: isEditingPointOfInterest,
@@ -24,17 +27,43 @@ export function usePointOfInterest(id: string) {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["pointOfInterests", id]);
-        queryClient.invalidateQueries(["pointOfInterests"])
+        queryClient.invalidateQueries(["pointOfInterests"]);
       },
     }
   );
+
+  // Remove point of interest
+  const {
+    mutate: removePointOfInterest,
+    isLoading: isRemovingPointOfInterest,
+    isError: isErrorRemovingPointOfInterest,
+  } = useMutation(() => deletePointOfInterest(id), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["pointOfInterests", id]);
+      queryClient.invalidateQueries(["pointOfInterests"]);
+    },
+  });
+
+  const isPoIOpenFunc: (poi: PointOfInterest | Ride) => void = isPoIOpen;
+  
   return {
+    // Get
     isLoading,
     isError,
     pointOfInterest,
+
+    // Edit
     editPointOfInterest,
     isEditingPointOfInterest,
     isErrorEditingPointOfInterest,
+
+    // Remove
+    removePointOfInterest,
+    isRemovingPointOfInterest,
+    isErrorRemovingPointOfInterest,
+
+    // Utility functions
+    isPoIOpen: isPoIOpenFunc
   };
 
   return {

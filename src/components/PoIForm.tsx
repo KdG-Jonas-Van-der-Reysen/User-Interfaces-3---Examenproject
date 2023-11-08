@@ -110,7 +110,11 @@ export function PoIForm({ poi }: PoIFormProps) {
             addPointOfInterest(poi);
           }
         }
-        navigate("/");
+        if(isEdit) {
+          navigate(`/pois/${id}`);
+        } else {
+          navigate("/");
+        }
         reset();
       })}
     >

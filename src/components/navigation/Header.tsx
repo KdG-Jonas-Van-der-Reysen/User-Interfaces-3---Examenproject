@@ -48,7 +48,7 @@ export function Header() {
           <img
             src={Logo}
             alt="Logo"
-            style={{ height: "30px", width: "auto" }}
+            style={{ height: "30px", width: "auto", cursor: "pointer" }}
           />
         </Link>
       </Toolbar>

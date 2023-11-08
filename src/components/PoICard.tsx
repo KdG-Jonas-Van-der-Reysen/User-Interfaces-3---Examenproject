@@ -5,6 +5,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
 import { IconText } from "./IconText";
+import { isPoIOpen } from "../model/PointOfInterest";
 
 interface PoICardProps {
   poi: PointOfInterest;
@@ -12,6 +13,7 @@ interface PoICardProps {
 
 export function PoICard({ poi }: PoICardProps) {
   const navigate = useNavigate();
+  const isOpen = isPoIOpen(poi);
   return (
     <Link
       onClick={() => {
@@ -30,30 +32,46 @@ export function PoICard({ poi }: PoICardProps) {
           <Typography gutterBottom variant="h5" component="div">
             {poi.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            <IconText>
-              <AccessTimeIcon
-                className="icon"
-                sx={{ color: "green", marginRight: "5px" }}
-              />
-              <span style={{ color: "green" }}>
-                Open! Sluit om {poi.openingHours.closeTime}
-              </span>
-            </IconText>
+          <Typography variant="body2" color="text.secondary" component="p">
+            {isOpen === 0 && (
+              <IconText>
+                <AccessTimeIcon
+                  className="icon"
+                  sx={{ color: "green", marginRight: "5px" }}
+                />
+                <span style={{ color: "green" }}>
+                  Open! Sluit om {poi.openingHours.closeTime}
+                </span>
+              </IconText>
+            )}
 
-            <IconText>
-              <AccessTimeIcon
-                className="icon"
-                sx={{ color: "red", marginRight: "5px" }}
-              />
-              <p style={{ color: "red" }}>
-                Opent om {poi.openingHours.openTime}
-              </p>
-            </IconText>
+            {isOpen === 1 && (
+              <IconText>
+                <AccessTimeIcon
+                  className="icon"
+                  sx={{ color: "red", marginRight: "5px" }}
+                />
+                <span style={{ color: "red" }}>
+                  Opent weer om {poi.openingHours.closeTime}
+                </span>
+              </IconText>
+            )}
+
+            {isOpen === -1 && (
+              <IconText>
+                <AccessTimeIcon
+                  className="icon"
+                  sx={{ color: "red", marginRight: "5px" }}
+                />
+                <span style={{ color: "red" }}>
+                  Opent om {poi.openingHours.openTime}
+                </span>
+              </IconText>
+            )}
 
             <IconText>
               <PeopleAltIcon className="icon" sx={{ marginRight: "5px" }} />
-              <p>Huidige wachttijd: {poi.currentWaitTime} min</p>
+              <span>Huidige wachttijd: {poi.currentWaitTime} min</span>
             </IconText>
           </Typography>
         </CardContent>

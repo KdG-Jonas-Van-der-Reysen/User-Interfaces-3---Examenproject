@@ -3,7 +3,8 @@ import {
   createPointOfInterest,
   getPointOfInterests,
 } from "../services/PointOfInterestDataService";
-import { PointOfInterest } from "../model/PointOfInterest";
+import { PointOfInterest, isPoIOpen } from "../model/PointOfInterest";
+import { Ride } from "../model/Ride";
 
 export function usePointOfInterests() {
   const queryClient = useQueryClient();
@@ -11,7 +12,11 @@ export function usePointOfInterests() {
     isLoading,
     isError,
     data: pointOfInterests,
-  } = useQuery(["pointOfInterests"], getPointOfInterests);
+  } = useQuery({
+    queryKey: ["pointOfInterests"],
+    queryFn: getPointOfInterests,
+    refetchInterval: 30000,
+  });
 
   const {
     mutate: addPointOfInterest,
@@ -25,6 +30,9 @@ export function usePointOfInterests() {
       },
     }
   );
+  
+  const isPoIOpenFunc: (poi: PointOfInterest | Ride) => void = isPoIOpen;
+
   return {
     isLoading,
     isError,
@@ -32,5 +40,8 @@ export function usePointOfInterests() {
     addPointOfInterest,
     isAddingPointOfInterest,
     isErrorAddingPointOfInterest,
+
+    // Utils
+    isPoIOpen: isPoIOpenFunc
   };
 }

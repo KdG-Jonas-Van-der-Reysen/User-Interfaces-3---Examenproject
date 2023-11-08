@@ -5,19 +5,38 @@ import { Breacrumbs } from "./navigation/Breacrumbs";
 import { Ride } from "../model/Ride";
 import { PoIMap } from "./PoIMap";
 import { useContext } from "react";
+import { isPoIOpen } from "../model/PointOfInterest";
 import AuthContext from "../contexts/AuthContext";
 
 // Icons
-import CreateIcon from '@mui/icons-material/Create';
+import CreateIcon from "@mui/icons-material/Create";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Swal from "sweetalert2";
 
 export function PoIDetail() {
   const { id } = useParams();
-  const { isLoading, isError, pointOfInterest: poi } = usePointOfInterest(id!);
+  const {
+    isLoading,
+    isError,
+    pointOfInterest: poi,
+    removePointOfInterest,
+  } = usePointOfInterest(id!);
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
+  let open = false;
+  if (poi) {
+    open = isPoIOpen(poi) === 0;
+  }
 
   // Styles
-  const makeButtonFloat = {
+  const makeFirstButtonFloat = {
+    margin: 0,
+    right: 90,
+    bottom: 20,
+    position: "fixed",
+  };
+
+  const makeSecondButtonFloat = {
     margin: 0,
     right: 20,
     bottom: 20,
@@ -43,6 +62,26 @@ export function PoIDetail() {
     adults: "Volwassenen",
     all: "Alle leeftijden",
   };
+
+  function removePoi() {
+    Swal.fire({
+      title: `Ben je zeker dat je ${
+        poi?.name || "deze poi "
+      } wilt verwijderen?`,
+      text: "Je kan deze actie niet ongedaan maken!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Verwijderen",
+      cancelButtonText: "Annuleren",
+    }).then((result) => {
+      if (result.isConfirmed && removePointOfInterest) {
+        removePointOfInterest();
+        navigate("/");
+      }
+    });
+  }
 
   return (
     <div>
@@ -76,8 +115,13 @@ export function PoIDetail() {
                   marginTop: "0.5rem",
                 }}
               >
+                {open ? (
+                  <Chip size="small" label="Open" color="success" />
+                ) : (
+                  <Chip size="small" label="Gesloten" color="error" />
+                )}
                 {poi.tags.map((tag) => (
-                  <Chip size="small" label={tag} />
+                  <Chip key={tag} size="small" label={tag} />
                 ))}
               </Box>
             )}
@@ -117,14 +161,24 @@ export function PoIDetail() {
 
         <PoIMap pois={[poi]} />
         {!!user && user.isAdmin && (
-          <Fab
-            variant="extended"
-            sx={makeButtonFloat}
-            onClick={() => navigate(`/pois/${poi.id}/edit`)}
-          >
-            <CreateIcon sx={{ mr: 1 }} />
-            Bewerken
-          </Fab>
+          <div>
+            <Fab
+              color="info"
+              aria-label="add"
+              sx={makeFirstButtonFloat}
+              onClick={() => navigate(`/pois/${poi.id}/edit`)}
+            >
+              <CreateIcon />
+            </Fab>
+            <Fab
+              color="error"
+              aria-label="add"
+              sx={makeSecondButtonFloat}
+              onClick={removePoi}
+            >
+              <DeleteIcon />
+            </Fab>
+          </div>
         )}
       </Box>
     </div>

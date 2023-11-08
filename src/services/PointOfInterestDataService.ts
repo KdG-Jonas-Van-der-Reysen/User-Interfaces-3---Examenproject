@@ -52,3 +52,7 @@ export async function updatePointOfInterest(id:string, poiOrRide: Omit<PointOfIn
     return axios.put<PointOfInterest | Ride>(`/pointOfInterests/${id}`, poiOrRide);
   }
 }
+
+export async function deletePointOfInterest(id: string) {
+  return axios.delete(`/pointOfInterests/${id}`);
+}

@@ -4,14 +4,15 @@ interface IconTextProps {
 }
 export function IconText({children}: IconTextProps) {
     return (
-        <div
+        <span
             style={{
                 display: "flex",
                 alignItems: "center",
                 height: "30px",
+                margin: "5px 0 0",
             }}
         >
             {children}
-        </div>
+        </span>
     );
 }

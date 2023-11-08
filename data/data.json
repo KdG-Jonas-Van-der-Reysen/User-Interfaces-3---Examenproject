@@ -11,8 +11,8 @@
         "zwaartekracht"
       ],
       "openingHours": {
-        "openTime": "11:00",
-        "closeTime": "15:00"
+        "openTime": "22:00",
+        "closeTime": "23:30"
       },
       "currentWaitTime": 25,
       "mapDrawingOptions": {

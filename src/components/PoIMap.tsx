@@ -52,6 +52,7 @@ export function PoIMap({ pois }: PoIMapProps) {
               top: `${poi.mapDrawingOptions.location.y}px`,
               left: `${poi.mapDrawingOptions.location.x}px`,
             }}
+            key={poi.id}
           >
             {iconMappings[poi.type] && (
               <Chip

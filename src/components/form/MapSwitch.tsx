@@ -1,7 +1,6 @@
 import { FormControlLabel, FormGroup, Switch, styled } from "@mui/material";
-import { useState } from "react";
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
   height: 34,
   padding: 7,
@@ -49,11 +48,20 @@ interface MapListViewSwitchProps {
   setShowMap: (showMap: boolean) => void;
 }
 
-export function MapListViewSwitch({ showMap, setShowMap}: MapListViewSwitchProps) {
+export function MapListViewSwitch({
+  showMap,
+  setShowMap,
+}: MapListViewSwitchProps) {
   return (
-    <FormGroup sx={{float: 'right'}}>
+    <FormGroup sx={{ float: "right" }}>
       <FormControlLabel
-        control={<MaterialUISwitch sx={{ m: 1 }} value={showMap} onChange={(e) => setShowMap(e.target.checked)} />}
+        control={
+          <MaterialUISwitch
+            sx={{ m: 1 }}
+            value={showMap}
+            onChange={(e) => setShowMap(e.target.checked)}
+          />
+        }
         label=""
       />
     </FormGroup>

@@ -164,7 +164,7 @@ export function PoIs() {
           </Box>
         </Grid>
         <Grid item xs={9}>
-          {showMap ? <PoIMap pois={filteredPois!} /> : <PoICards pois={filteredPois!} />}
+          {showMap ? <PoIMap pois={filteredPois!} clickable={true} /> : <PoICards pois={filteredPois!} />}
         </Grid>
       </Grid>
 

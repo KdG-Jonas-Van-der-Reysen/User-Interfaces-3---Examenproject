@@ -21,6 +21,7 @@ export interface PointOfInterest {
       width: number;
       height: number;
     };
+    hidden: boolean;
   };
 }
 

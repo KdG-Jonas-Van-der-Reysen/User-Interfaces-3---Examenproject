@@ -1,4 +1,4 @@
-import { Box, Chip } from "@mui/material";
+import { Box, Chip, Link } from "@mui/material";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
 
@@ -9,6 +9,7 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import KeyIcon from "@mui/icons-material/Key";
 import StorefrontIcon from "@mui/icons-material/Storefront";
+import { useNavigate } from "react-router-dom";
 
 const iconMappings: { [key: string]: React.ReactElement } = {
   attractie: <AttractionsIcon />,
@@ -21,8 +22,10 @@ const iconMappings: { [key: string]: React.ReactElement } = {
 
 interface PoIMapProps {
   pois: (PointOfInterest | Ride)[];
+  clickable?: boolean;
 }
-export function PoIMap({ pois }: PoIMapProps) {
+export function PoIMap({ pois, clickable }: PoIMapProps) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
@@ -54,7 +57,23 @@ export function PoIMap({ pois }: PoIMapProps) {
             }}
             key={poi.id}
           >
-            {iconMappings[poi.type] && (
+            {clickable && iconMappings[poi.type] && (
+              <Link
+                onClick={() => {
+                  navigate(`/pois/${poi.id}`);
+                }}
+                sx={{ cursor: "pointer" }}
+              >
+                <Chip
+                  icon={iconMappings[poi.type]}
+                  label={poi.name}
+                  variant="filled"
+                  color="primary"
+                />
+              </Link>
+            )}
+
+            {!clickable && iconMappings[poi.type] && (
               <Chip
                 icon={iconMappings[poi.type]}
                 label={poi.name}
@@ -62,7 +81,6 @@ export function PoIMap({ pois }: PoIMapProps) {
                 color="primary"
               />
             )}
-
           </div>
         ))}
       </Box>

@@ -1,9 +1,11 @@
 import {
   Box,
+  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
   Select,
+  Switch,
   TextField,
 } from "@mui/material";
 
@@ -19,7 +21,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 // Define a partial validation schema for the properties that need validation
 const poiSchema: z.ZodType<Partial<RideData>> = z.object({
   name: z.string().min(3, "Geef aub een naam van minstens 3 karakters"),
-  type: z.enum(["attractie", "toiletten", "restaurant", "foodtruck", "lockers", "winkel"]),
+  type: z.enum([
+    "attractie",
+    "toiletten",
+    "restaurant",
+    "foodtruck",
+    "lockers",
+    "winkel",
+  ]),
   description: z.string(),
   image: z.string().url("Vul aub een geldige URL in"),
   openingHours: z.object({
@@ -51,8 +60,11 @@ const poiSchema: z.ZodType<Partial<RideData>> = z.object({
         .number()
         .gte(0, "Hoogte moet groter of gelijk aan 0 zijn"),
     }),
+    hidden: z.boolean(),
   }),
-  minLength: z.coerce.number().gte(100, "Minimum lengte moet groter of gelijk aan 100 cm zijn"),
+  minLength: z.coerce
+    .number()
+    .gte(100, "Minimum lengte moet groter of gelijk aan 100 cm zijn"),
   similarRidesStr: z.string(),
   targetAudience: z.enum(["toddlers", "teens", "adults", "all"]),
 });
@@ -89,6 +101,7 @@ export function PoIForm({ poi }: PoIFormProps) {
           width: 15,
           height: 15,
         },
+        hidden: false,
       },
       targetAudience: (poi as Ride)?.targetAudience || "all",
       minLength: (poi as Ride)?.minLength || 120,
@@ -103,6 +116,7 @@ export function PoIForm({ poi }: PoIFormProps) {
   const navigate = useNavigate();
 
   const watchType = watch("type", poi?.type || "attractie");
+  const watchHidden = watch("mapDrawingOptions.hidden", false);
   const isEdit = !!poi;
 
   return (
@@ -144,6 +158,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 width: data.mapDrawingOptions.size.width,
                 height: data.mapDrawingOptions.size.height,
               },
+              hidden: data.mapDrawingOptions.hidden,
             },
           };
           console.log("poi", poi);
@@ -375,6 +390,21 @@ export function PoIForm({ poi }: PoIFormProps) {
         </Box>
 
         <p style={{ fontWeight: "bold", marginBottom: 0 }}>Kaartinfo</p>
+        <FormControlLabel
+          sx={{ marginBottom: "-15px" }}
+          control={
+            <Controller
+              name="mapDrawingOptions.hidden"
+              control={control}
+              render={({ field }) => <Switch checked={field.value} onChange={(e) => {field.onChange(e.target.checked)}} />}
+            />
+          }
+          label="Zone reeds op kaart aangeduid?"
+        />
+        <small style={{ marginBottom: "1rem" }}>
+          Hiermee zal er geen icoontje weergegeven worden, maar kun je wel een
+          "klikbare zone" instellen
+        </small>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <InputLabel sx={{ marginBottom: "15px" }}>Locatie</InputLabel>
@@ -416,8 +446,10 @@ export function PoIForm({ poi }: PoIFormProps) {
               />
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
-            <InputLabel sx={{ marginBottom: "16px" }}>Afmetingen</InputLabel>
+          {watchHidden && (<Grid item xs={12} md={6}>
+            <InputLabel sx={{ marginBottom: "16px" }}>
+              Afmetingen klikbare zone
+            </InputLabel>
             <Box
               sx={{
                 display: "flex",
@@ -455,7 +487,7 @@ export function PoIForm({ poi }: PoIFormProps) {
                 )}
               />
             </Box>
-          </Grid>
+          </Grid>)}
         </Grid>
 
         {/* Submit */}

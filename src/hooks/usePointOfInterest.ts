@@ -13,7 +13,7 @@ export function usePointOfInterest(id: string) {
     isLoading,
     isError,
     data: pointOfInterest,
-  } = useQuery(["poi", id], () => {
+  } = useQuery(["pointOfInterests", id], () => {
     return getPointOfInterest(id);
   });
 

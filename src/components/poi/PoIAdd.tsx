@@ -2,7 +2,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import { Breacrumbs } from "./navigation/Breacrumbs";
+import { Breacrumbs } from "../navigation/Breacrumbs";
 import { PoIForm } from "./PoIForm";
 
 export function PoIAdd() {

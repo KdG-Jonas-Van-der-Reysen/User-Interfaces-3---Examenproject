@@ -10,10 +10,10 @@ import axios from "axios";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { deDE } from "@mui/x-date-pickers/locales";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { PoIDetail } from "./components/PoIDetail";
+import { PoIDetail } from "./components/poi/PoIDetail";
 import AuthContextProvider from "./contexts/AuthContextProvider";
-import { PoIAdd } from "./components/PoIAdd";
-import { PoIEdit } from "./components/PoIEdit";
+import { PoIAdd } from "./components/poi/PoIAdd";
+import { PoIEdit } from "./components/poi/PoIEdit";
 
 axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 

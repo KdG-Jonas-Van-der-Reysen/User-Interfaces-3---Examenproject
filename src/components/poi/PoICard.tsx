@@ -1,11 +1,11 @@
 import { Card, CardContent, CardMedia, Link, Typography } from "@mui/material";
-import { PointOfInterest } from "../model/PointOfInterest";
+import { PointOfInterest } from "../../model/PointOfInterest";
 
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { useNavigate } from "react-router-dom";
-import { IconText } from "./IconText";
-import { isPoIOpen } from "../model/PointOfInterest";
+import { IconText } from "../utils/IconText";
+import { isPoIOpen } from "../../model/PointOfInterest";
 
 interface PoICardProps {
   poi: PointOfInterest;

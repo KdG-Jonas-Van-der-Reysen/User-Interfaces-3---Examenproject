@@ -11,13 +11,13 @@ import {
 
 import { z } from "zod";
 import { Controller, useForm } from "react-hook-form";
-import { Ride, RideData } from "../model/Ride";
-import { usePointOfInterests } from "../hooks/usePointOfInterests";
+import { Ride, RideData } from "../../model/Ride";
+import { usePointOfInterests } from "../../hooks/usePointOfInterests";
 import { useNavigate } from "react-router-dom";
-import { PointOfInterest } from "../model/PointOfInterest";
-import { usePointOfInterest } from "../hooks/usePointOfInterest";
+import { PointOfInterest } from "../../model/PointOfInterest";
+import { usePointOfInterest } from "../../hooks/usePointOfInterest";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PoIMapDnD } from "./PoIMapDnD";
+import { PoIMapDnD } from "./maps/PoIMapDnD";
 import { ErrorSharp } from "@mui/icons-material";
 
 // Define a partial validation schema for the properties that need validation
@@ -420,7 +420,8 @@ export function PoIForm({ poi }: PoIFormProps) {
           name="mapDrawingOptions"
           control={control}
           render={({ field }) => (
-            <PoIMapDnD
+            <Box sx={{overflowX: "auto"}}>
+              <PoIMapDnD
               type={watchType}
               name={watch("name")}
               mapDrawingOptions={field.value}
@@ -430,9 +431,10 @@ export function PoIForm({ poi }: PoIFormProps) {
                 field.onChange(mapDrawingOptions);
               }}
             />
+            </Box>
           )}
         />
-        
+
         {/* Submit */}
         <button type="submit">{poi ? "Opslaan" : "Toevoegen"}</button>
       </Box>

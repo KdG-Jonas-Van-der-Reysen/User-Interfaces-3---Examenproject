@@ -2,12 +2,12 @@ import {
   Typography,
 } from "@mui/material";
 
-import { Breacrumbs } from "./navigation/Breacrumbs";
+import { Breacrumbs } from "../navigation/Breacrumbs";
 import { PoIForm } from "./PoIForm";
-import { usePointOfInterest } from "../hooks/usePointOfInterest";
+import { usePointOfInterest } from "../../hooks/usePointOfInterest";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import AuthContext from "../contexts/AuthContext";
+import AuthContext from "../../contexts/AuthContext";
 
 export function PoIEdit() {
   const { id } = useParams();

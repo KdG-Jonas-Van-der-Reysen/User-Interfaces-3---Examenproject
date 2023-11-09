@@ -1,12 +1,12 @@
 import { Box, Chip, Fab, Grid, Typography } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
-import { usePointOfInterest } from "../hooks/usePointOfInterest";
-import { Breacrumbs } from "./navigation/Breacrumbs";
-import { Ride } from "../model/Ride";
-import { PoIMap } from "./PoIMap";
+import { usePointOfInterest } from "../../hooks/usePointOfInterest";
+import { Breacrumbs } from "../navigation/Breacrumbs";
+import { Ride } from "../../model/Ride";
+import { PoIMap } from "./maps/PoIMap";
 import { useContext } from "react";
-import { isPoIOpen } from "../model/PointOfInterest";
-import AuthContext from "../contexts/AuthContext";
+import { isPoIOpen } from "../../model/PointOfInterest";
+import AuthContext from "../../contexts/AuthContext";
 
 // Icons
 import CreateIcon from "@mui/icons-material/Create";
@@ -159,7 +159,9 @@ export function PoIDetail() {
           </Grid>
         </Grid>
 
-        <PoIMap pois={[poi]} />
+        <Box sx={{overflowX: "auto"}}>
+          <PoIMap pois={[poi]} />
+        </Box>
         {!!user && user.isAdmin && (
           <div>
             <Fab

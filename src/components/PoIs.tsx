@@ -13,14 +13,14 @@ import {
   Typography,
 } from "@mui/material";
 import { MapListViewSwitch } from "./form/MapSwitch";
-import { PoICards } from "./PoICards";
+import { PoICards } from "./poi/PoICards";
 
 import { useNavigate } from "react-router-dom";
 import { usePointOfInterests } from "../hooks/usePointOfInterests";
 import { useContext, useState } from "react";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
-import { PoIMap } from "./PoIMap";
+import { PoIMap } from "./poi/maps/PoIMap";
 import AuthContext from "../contexts/AuthContext";
 import queryString from "query-string";
 import { isPoIOpen } from "../model/PointOfInterest";
@@ -28,7 +28,7 @@ import { isPoIOpen } from "../model/PointOfInterest";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
-import LabelIcon from '@mui/icons-material/Label';
+import LabelIcon from "@mui/icons-material/Label";
 
 export function PoIs() {
   const { user } = useContext(AuthContext);
@@ -92,10 +92,10 @@ export function PoIs() {
           openClosedFilter === "all" ||
           (openClosedFilter === "open" && isPoIOpen(poi) === 0) ||
           (openClosedFilter === "closed" && isPoIOpen(poi) !== 1)
-      ).filter(
+      )
+      .filter(
         (poi) =>
-          tagsFilter === "" ||
-          poi.tags.includes(tagsFilter.toLowerCase())
+          tagsFilter === "" || poi.tags.includes(tagsFilter.toLowerCase())
       );
   }
   return (
@@ -115,7 +115,7 @@ export function PoIs() {
       </p>
 
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} sm={4} md={3}>
           <Box
             sx={{
               display: "flex",
@@ -270,8 +270,8 @@ export function PoIs() {
             </FormControl>
           </Box>
         </Grid>
-        {(!isLoading && !isError) && (
-          <Grid item xs={9}>
+        {!isLoading && !isError && (
+          <Grid item xs={12} sm={8} md={9} sx={{overflowX: 'auto'}}>
             {showMap ? (
               <PoIMap pois={filteredPois!} clickable={true} />
             ) : (

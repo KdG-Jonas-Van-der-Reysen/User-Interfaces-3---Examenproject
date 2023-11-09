@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
 import { Box, Chip, Link } from "@mui/material";
-import { PointOfInterest } from "../model/PointOfInterest";
-import { Ride } from "../model/Ride";
+import { PointOfInterest } from "../../../model/PointOfInterest";
+import { Ride } from "../../../model/Ride";
 
 // Icons
 import AttractionsIcon from "@mui/icons-material/Attractions";

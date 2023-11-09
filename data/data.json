@@ -70,29 +70,32 @@
     {
       "name": "Kondaa",
       "type": "attractie",
-      "image": "https://www.walibi.be/sites/default/files/styles/400x267/public/entertainment/2021-05/Kondaa-Walibi-Belgium-parc-attractions.jpg?itok=sN9VucYd",
       "description": "De achtbaan van alle records!\n",
-      "tags": [
-        "snel",
-        "supersnel"
-      ],
+      "image": "https://www.walibi.be/sites/default/files/styles/400x267/public/entertainment/2021-05/Kondaa-Walibi-Belgium-parc-attractions.jpg?itok=sN9VucYd",
       "openingHours": {
         "openTime": "10:00",
         "closeTime": "20:00"
       },
-      "currentWaitTime": "45",
+      "tagsStr": "snel,supersnel",
+      "currentWaitTime": 45,
       "mapDrawingOptions": {
         "location": {
-          "x": 708,
+          "x": 680,
           "y": 130
         },
         "size": {
           "width": 15,
           "height": 15
-        }
+        },
+        "hidden": false
       },
+      "minLength": 130,
+      "similarRidesStr": "snel,supersnel",
       "targetAudience": "adults",
-      "minLength": "130",
+      "tags": [
+        "snel",
+        "supersnel"
+      ],
       "similarRides": [
         "snel",
         "supersnel"
@@ -226,29 +229,32 @@
     {
       "name": "Cobra",
       "type": "attractie",
-      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2019-04/Cobra2019-1.jpg?itok=pIkcmVND",
       "description": "Met zijn langzame start, houdt de Cobra de spanning erin gedurende enkele ogenblikken. Hij laat zijn prooi zo lang mogelijk wachten.",
-      "tags": [
-        "snel",
-        "achtbaan"
-      ],
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2019-04/Cobra2019-1.jpg?itok=pIkcmVND",
       "openingHours": {
         "openTime": "10:00",
         "closeTime": "20:00"
       },
-      "currentWaitTime": "50",
+      "tagsStr": "snel,achtbaan",
+      "currentWaitTime": 50,
       "mapDrawingOptions": {
         "location": {
-          "x": 137,
-          "y": 299
+          "x": 30,
+          "y": 240
         },
         "size": {
-          "width": 15,
-          "height": 15
-        }
+          "width": 180,
+          "height": 80
+        },
+        "hidden": true
       },
+      "minLength": 130,
+      "similarRidesStr": "snel,achtbaan",
       "targetAudience": "adults",
-      "minLength": "130",
+      "tags": [
+        "snel",
+        "achtbaan"
+      ],
       "similarRides": [
         "snel",
         "achtbaan"
@@ -326,28 +332,31 @@
     {
       "name": "Bubble swirl",
       "type": "attractie",
-      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/img_4236.jpg?itok=ayzCEyV4",
       "description": "Houd je van vliegen? Waag dan je kans in een kleurrijke luchtballon en vlieg de blauwe lucht in.",
-      "tags": [
-        "draaimolen"
-      ],
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/img_4236.jpg?itok=ayzCEyV4",
       "openingHours": {
         "openTime": "10:00",
         "closeTime": "20:00"
       },
-      "currentWaitTime": "20",
+      "tagsStr": "draaimolen",
+      "currentWaitTime": 20,
       "mapDrawingOptions": {
         "location": {
           "x": 372,
           "y": 128
         },
         "size": {
-          "width": 15,
-          "height": 15
-        }
+          "width": 300,
+          "height": 150
+        },
+        "hidden": false
       },
+      "minLength": 105,
+      "similarRidesStr": "draaimolen",
       "targetAudience": "toddlers",
-      "minLength": "105",
+      "tags": [
+        "draaimolen"
+      ],
       "similarRides": [
         "draaimolen"
       ],

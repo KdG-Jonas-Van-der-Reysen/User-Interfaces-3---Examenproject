@@ -54,24 +54,39 @@ export function PoIMap({ pois, clickable }: PoIMapProps) {
               position: "absolute",
               top: `${poi.mapDrawingOptions.location.y}px`,
               left: `${poi.mapDrawingOptions.location.x}px`,
+              minWidth: `${poi.mapDrawingOptions.size.width}px`,
+              minHeight: `${poi.mapDrawingOptions.size.height}px`,
             }}
             key={poi.id}
           >
-            {clickable && iconMappings[poi.type] && (
-              <Link
-                onClick={() => {
-                  navigate(`/pois/${poi.id}`);
-                }}
-                sx={{ cursor: "pointer" }}
-              >
-                <Chip
-                  icon={iconMappings[poi.type]}
-                  label={poi.name}
-                  variant="filled"
-                  color="primary"
-                />
-              </Link>
-            )}
+            {clickable &&
+              !poi.mapDrawingOptions.hidden &&
+              iconMappings[poi.type] && (
+                <Link
+                  onClick={() => {
+                    navigate(`/pois/${poi.id}`);
+                  }}
+                  sx={{ cursor: "pointer" }}
+                >
+                  <Chip
+                    icon={iconMappings[poi.type]}
+                    label={poi.name}
+                    variant="filled"
+                    color="primary"
+                  />
+                </Link>
+              )}
+
+            {clickable &&
+              poi.mapDrawingOptions.hidden && (
+                <Link
+                  onClick={() => {
+                    navigate(`/pois/${poi.id}`);
+                  }}
+                  sx={{ cursor: "pointer", width:'100%', height:'100%', position:'absolute', top:0, left:0}}
+                >
+                </Link>
+              )}
 
             {!clickable && iconMappings[poi.type] && (
               <Chip

@@ -587,6 +587,34 @@
         ""
       ],
       "id": 21
+    },
+    {
+      "name": "Lockers",
+      "type": "lockers",
+      "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2022-06/1280x600%20Consigne%20%281%29.jpg?itok=GKxFPbVi",
+      "description": "Hier kun je jouw items opbergen",
+      "tags": [
+        "lockers",
+        "veilig",
+        "duur"
+      ],
+      "openingHours": {
+        "openTime": "10:00",
+        "closeTime": "20:00"
+      },
+      "currentWaitTime": 30,
+      "mapDrawingOptions": {
+        "location": {
+          "x": 0,
+          "y": 0
+        },
+        "size": {
+          "width": 15,
+          "height": 15
+        },
+        "hidden": false
+      },
+      "id": 22
     }
   ]
 }

@@ -116,7 +116,7 @@ export function PoIForm({ poi }: PoIFormProps) {
   const navigate = useNavigate();
 
   const watchType = watch("type", poi?.type || "attractie");
-  const watchHidden = watch("mapDrawingOptions.hidden", false);
+  const watchHidden = watch("mapDrawingOptions.hidden",poi?.mapDrawingOptions?.hidden || false);
   const isEdit = !!poi;
 
   return (

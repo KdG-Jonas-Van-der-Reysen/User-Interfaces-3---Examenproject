@@ -18,6 +18,7 @@ const iconMappings: { [key: string]: React.ReactElement } = {
   foodtruck: <FastfoodIcon />,
   key: <KeyIcon />,
   winkel: <StorefrontIcon />,
+  lockers: <KeyIcon />,
 };
 
 interface PoIMapProps {

@@ -239,14 +239,14 @@
       "currentWaitTime": 50,
       "mapDrawingOptions": {
         "location": {
-          "x": 92,
-          "y": 282
+          "x": 26,
+          "y": 225.99998474121094
         },
         "size": {
-          "width": 180,
-          "height": 80
+          "width": 212,
+          "height": 115
         },
-        "hidden": false
+        "hidden": true
       },
       "minLength": 130,
       "similarRidesStr": "snel,achtbaan",

@@ -55,12 +55,8 @@ const poiSchema: z.ZodType<Partial<RideData>> = z.object({
       y: z.coerce.number().gte(0, "Y moet groter of gelijk aan 0 zijn"),
     }),
     size: z.object({
-      width: z.coerce
-        .number()
-        .gte(0, "Breedte moet groter of gelijk aan 0 zijn"),
-      height: z.coerce
-        .number()
-        .gte(0, "Hoogte moet groter of gelijk aan 0 zijn"),
+      width: z.coerce.number(),
+      height: z.coerce.number(),
     }),
     hidden: z.boolean(),
   }),
@@ -429,16 +425,14 @@ export function PoIForm({ poi }: PoIFormProps) {
               name={watch("name")}
               mapDrawingOptions={field.value}
               setMapDrawingOptions={(mapDrawingOptions) => {
+                console.log(mapDrawingOptions);
+                console.log(typeof mapDrawingOptions.size.width);
                 field.onChange(mapDrawingOptions);
               }}
             />
           )}
         />
-
-        {!!errors.mapDrawingOptions && (
-          <p>{JSON.stringify(errors.mapDrawingOptions)}</p>
-        )}
-
+        
         {/* Submit */}
         <button type="submit">{poi ? "Opslaan" : "Toevoegen"}</button>
       </Box>

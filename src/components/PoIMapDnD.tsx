@@ -87,8 +87,8 @@ export function PoIMapDnD({
     setMapDrawingOptions({
       ...mapDrawingOptions,
       size: {
-        width: ref.style.width,
-        height: ref.style.height,
+        width: Number(ref.style.width.replace("px", "")),
+        height: Number(ref.style.height.replace("px", "")),
       },
       location: {
         x: position.x,
@@ -127,7 +127,7 @@ export function PoIMapDnD({
           enableResizing={mapDrawingOptions.hidden}
         >
           {mapDrawingOptions.hidden ? (
-            <Box sx={{ width: "100%", height: "100%", background: "red"}} />
+            <Box sx={{ width: "100%", height: "100%", border: "3px solid red", borderRadius: "10px"}} />
           ) : (
             <Chip
               icon={iconMappings[type]}

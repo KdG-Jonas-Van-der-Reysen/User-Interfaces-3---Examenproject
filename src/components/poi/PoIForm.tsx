@@ -106,7 +106,7 @@ export function PoIForm({ poi }: PoIFormProps) {
     },
   });
 
-  const { addPointOfInterest } = usePointOfInterests("");
+  const { addPointOfInterest } = usePointOfInterests();
 
   const id: string = `${poi?.id || "1"}`;
   const { editPointOfInterest } = usePointOfInterest(id);

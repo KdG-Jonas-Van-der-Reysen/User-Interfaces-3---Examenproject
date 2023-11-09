@@ -6,15 +6,17 @@ import {
 import { PointOfInterest, isPoIOpen } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
 
-export function usePointOfInterests() {
+export function usePointOfInterests(filterString: string) {
   const queryClient = useQueryClient();
   const {
     isLoading,
     isError,
     data: pointOfInterests,
   } = useQuery({
-    queryKey: ["pointOfInterests"],
-    queryFn: getPointOfInterests,
+    queryKey: ["pointOfInterests", filterString],
+    queryFn: () => {
+      return getPointOfInterests(filterString);
+    },
     refetchInterval: 30000,
   });
 
@@ -30,7 +32,7 @@ export function usePointOfInterests() {
       },
     }
   );
-  
+
   const isPoIOpenFunc: (poi: PointOfInterest | Ride) => void = isPoIOpen;
 
   return {
@@ -42,6 +44,6 @@ export function usePointOfInterests() {
     isErrorAddingPointOfInterest,
 
     // Utils
-    isPoIOpen: isPoIOpenFunc
+    isPoIOpen: isPoIOpenFunc,
   };
 }

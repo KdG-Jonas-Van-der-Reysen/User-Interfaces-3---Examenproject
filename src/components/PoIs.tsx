@@ -8,6 +8,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Slider,
   TextField,
   Typography,
 } from "@mui/material";
@@ -16,6 +17,7 @@ import { PoICards } from "./PoICards";
 // Icons
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 import { useNavigate } from "react-router-dom";
 import { usePointOfInterests } from "../hooks/usePointOfInterests";
@@ -24,11 +26,11 @@ import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
 import { PoIMap } from "./PoIMap";
 import AuthContext from "../contexts/AuthContext";
-
+import queryString from "query-string";
+import { isPoIOpen } from "../model/PointOfInterest";
 export function PoIs() {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
-  
   // Styles
   const makeButtonFloat = {
     margin: 0,
@@ -42,33 +44,53 @@ export function PoIs() {
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("all");
   const [audienceFilter, setAudienceFilter] = useState("all");
+  const [minLengthFilter, setMinLengthFilter] = useState(100);
+  const [maxWaitTimeFilter, setMaxWaitTimeFilter] = useState(120);
+  const [openClosedFilter, setOpenClosedFilter] = useState("all");
   const [showMap, setShowMap] = useState(false);
 
+  // Build query object
+  const query: Record<string, string> = {};
+
+  if (search !== "") query.name_like = search;
+  if (typeFilter !== "all") query.type = typeFilter;
+  if (audienceFilter !== "all") query.audience = audienceFilter;
+  query.currentWaitTime_lte = maxWaitTimeFilter.toString();
+
+  console.log(queryString.stringify(query));
+
   // Data
-  const { isLoading, isError, pointOfInterests: rides } = usePointOfInterests();
+  const {
+    isLoading,
+    isError,
+    pointOfInterests: pointOfInterests,
+  } = usePointOfInterests(queryString.stringify(query));
 
   // Filtering
   let filteredPois: (PointOfInterest | Ride)[] = [];
 
-  if (!isLoading && !isError && rides) {
-    filteredPois = rides
-      // Filter for search
-      .filter((poi) => poi.name.toLowerCase().includes(search.toLowerCase()))
-      // Filter for type
-      .filter((poi) => typeFilter == "all" || poi.type == typeFilter)
-      // Filter for audience
+  if (!isLoading && !isError && pointOfInterests) {
+    filteredPois = pointOfInterests
       .filter(
         (poi) =>
           audienceFilter == "all" ||
           poi.type != "attractie" ||
           (poi.type == "attractie" &&
             (poi as Ride).targetAudience == audienceFilter)
+      )
+      .filter(
+        (poi) =>
+          poi.type != "attractie" ||
+          (poi.type == "attractie" &&
+            (poi as Ride).minLength >= minLengthFilter)
+      )
+      .filter(
+        (poi) =>
+          openClosedFilter === "all" ||
+          (openClosedFilter === "open" && isPoIOpen(poi) === 0) ||
+          (openClosedFilter === "closed" && isPoIOpen(poi) !== 1)
       );
   }
-
-  if (typeFilter !== "all")
-    filteredPois = filteredPois?.filter((ride) => ride.type === typeFilter);
-
   return (
     <div>
       <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -84,9 +106,6 @@ export function PoIs() {
         is helemaal aan jou. Op warme dagen kun je ook verkoeling vinden in onze
         verfrissende waterattracties. Veel plezier!
       </p>
-
-      {isLoading ? <p>Loading...</p> : null}
-      {isError ? <p>Error!</p> : null}
 
       <Grid container spacing={2}>
         <Grid item xs={3}>
@@ -141,41 +160,114 @@ export function PoIs() {
               </Select>
             </FormControl>
 
-            {/* Filter on audience */}
+            {/* Filter on audience & minLength */}
             {(typeFilter == "attractie" || typeFilter == "all") && (
-              <FormControl fullWidth sx={{ marginTop: "2rem" }}>
-                <InputLabel id="poi-type-filter">Voor wie?</InputLabel>
-                <Select
-                  labelId="poi-type-filter"
-                  id="demo-simple-select"
-                  value={audienceFilter}
-                  label="POI type filter"
-                  size="small"
-                  onChange={(e) => setAudienceFilter(e.target.value as string)}
-                >
-                  <MenuItem value="all">Alles</MenuItem>
-                  <MenuItem value="toddlers">Kleuters</MenuItem>
-                  <MenuItem value="teens">Tieners</MenuItem>
-                  <MenuItem value="adults">Volwassenen</MenuItem>
-                  <MenuItem value="all">Iedereen</MenuItem>
-                </Select>
-              </FormControl>
+              <Box>
+                <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+                  <InputLabel id="poi-type-filter">Voor wie?</InputLabel>
+                  <Select
+                    labelId="poi-type-filter"
+                    id="demo-simple-select"
+                    value={audienceFilter}
+                    label="POI type filter"
+                    size="small"
+                    onChange={(e) =>
+                      setAudienceFilter(e.target.value as string)
+                    }
+                  >
+                    <MenuItem value="all">Alles</MenuItem>
+                    <MenuItem value="toddlers">Kleuters</MenuItem>
+                    <MenuItem value="teens">Tieners</MenuItem>
+                    <MenuItem value="adults">Volwassenen</MenuItem>
+                    <MenuItem value="all">Iedereen</MenuItem>
+                  </Select>
+                </FormControl>
+
+                <Typography variant="body2" sx={{ marginTop: "2rem" }}>
+                  Minimum lengte: {minLengthFilter}cm
+                </Typography>
+                <Slider
+                  aria-label="Min length"
+                  getAriaValueText={() =>
+                    minLengthFilter.toString() + " centimeter"
+                  }
+                  valueLabelDisplay="auto"
+                  step={1}
+                  min={100}
+                  max={200}
+                  onChange={(_e, value) => setMinLengthFilter(value as number)}
+                  sx={{
+                    marginTop: "0.5rem",
+                    width: "calc(100% - 10px)",
+                    left: "10px",
+                  }}
+                />
+              </Box>
             )}
+
+            {/* Max wait time*/}
+            <Typography variant="body2" sx={{ marginTop: "2rem" }}>
+              Maximum wachttijd:
+            </Typography>
+            <TextField
+              fullWidth
+              type="number"
+              sx={{ marginTop: "1rem" }}
+              id="maxWaitTime"
+              InputProps={{
+                inputProps: { min: 0, max: 10 },
+                endAdornment: (
+                  <InputAdornment position="end">min</InputAdornment>
+                ),
+              }}
+              variant="standard"
+              placeholder="Zoek een attractie"
+              value={maxWaitTimeFilter}
+              onChange={(e) => setMaxWaitTimeFilter(Number(e.target.value))}
+            />
+
+            {/* Filter on open / closed */}
+            <FormControl fullWidth sx={{ marginTop: "2rem" }}>
+              <InputLabel id="poi-open-closed-filter">
+                Momenteel open of gesloten?
+              </InputLabel>
+              <Select
+                labelId="poi-open-closed-filter"
+                value={openClosedFilter}
+                label="Momenteel open of gesloten?"
+                size="small"
+                onChange={(e) => setOpenClosedFilter(e.target.value as string)}
+              >
+                <MenuItem value="all">Alles</MenuItem>
+                <MenuItem value="open">Open</MenuItem>
+                <MenuItem value="closed">Gesloten</MenuItem>
+              </Select>
+            </FormControl>
           </Box>
         </Grid>
-        <Grid item xs={9}>
-          {showMap ? <PoIMap pois={filteredPois!} clickable={true} /> : <PoICards pois={filteredPois!} />}
-        </Grid>
+        {(!isLoading && !isError) && (
+          <Grid item xs={9}>
+            {showMap ? (
+              <PoIMap pois={filteredPois!} clickable={true} />
+            ) : (
+              <PoICards pois={filteredPois!} />
+            )}
+          </Grid>
+        )}
+        {isLoading && <p>Loading...</p>}
+        {isError && <p>Er is iets misgelopen... Probeer het later opnieuw.</p>}
       </Grid>
 
-      {(!!user && user.isAdmin) && <Fab
-        variant="extended"
-        sx={makeButtonFloat}
-        onClick={() => navigate("/pois/add")}
-      >
-        <AddIcon sx={{ mr: 1 }} />
-        Toevoegen
-      </Fab>}
+      {!!user && user.isAdmin && (
+        <Fab
+          variant="extended"
+          sx={makeButtonFloat}
+          onClick={() => navigate("/pois/add")}
+        >
+          <AddIcon sx={{ mr: 1 }} />
+          Toevoegen
+        </Fab>
+      )}
     </div>
   );
 }

@@ -2,9 +2,9 @@ import axios from "axios";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { Ride } from "../model/Ride";
 
-export async function getPointOfInterests() {
+export async function getPointOfInterests(filterString: string) {
   const points = await axios.get<(PointOfInterest | Ride)[]>(
-    "/pointOfInterests"
+    "/pointOfInterests?" + filterString
   );
   return points.data;
 }

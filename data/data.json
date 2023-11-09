@@ -239,14 +239,14 @@
       "currentWaitTime": 50,
       "mapDrawingOptions": {
         "location": {
-          "x": 30,
-          "y": 240
+          "x": 92,
+          "y": 282
         },
         "size": {
           "width": 180,
           "height": 80
         },
-        "hidden": true
+        "hidden": false
       },
       "minLength": 130,
       "similarRidesStr": "snel,achtbaan",
@@ -336,14 +336,14 @@
       "image": "https://www.walibi.be/sites/default/files/styles/1280x670/public/entertainment/2018-03/img_4236.jpg?itok=ayzCEyV4",
       "openingHours": {
         "openTime": "10:00",
-        "closeTime": "20:00"
+        "closeTime": "15:00"
       },
       "tagsStr": "draaimolen",
       "currentWaitTime": 20,
       "mapDrawingOptions": {
         "location": {
-          "x": 372,
-          "y": 128
+          "x": 389,
+          "y": 169
         },
         "size": {
           "width": 300,
@@ -605,8 +605,8 @@
       "currentWaitTime": 30,
       "mapDrawingOptions": {
         "location": {
-          "x": 0,
-          "y": 0
+          "x": 107,
+          "y": 380
         },
         "size": {
           "width": 15,

@@ -14,10 +14,6 @@ import {
 } from "@mui/material";
 import { MapListViewSwitch } from "./form/MapSwitch";
 import { PoICards } from "./PoICards";
-// Icons
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 
 import { useNavigate } from "react-router-dom";
 import { usePointOfInterests } from "../hooks/usePointOfInterests";
@@ -28,6 +24,12 @@ import { PoIMap } from "./PoIMap";
 import AuthContext from "../contexts/AuthContext";
 import queryString from "query-string";
 import { isPoIOpen } from "../model/PointOfInterest";
+
+// Icons
+import AddIcon from "@mui/icons-material/Add";
+import SearchIcon from "@mui/icons-material/Search";
+import LabelIcon from '@mui/icons-material/Label';
+
 export function PoIs() {
   const { user } = useContext(AuthContext);
 
@@ -47,6 +49,7 @@ export function PoIs() {
   const [minLengthFilter, setMinLengthFilter] = useState(100);
   const [maxWaitTimeFilter, setMaxWaitTimeFilter] = useState(120);
   const [openClosedFilter, setOpenClosedFilter] = useState("all");
+  const [tagsFilter, setTagsFilter] = useState("");
   const [showMap, setShowMap] = useState(false);
 
   // Build query object
@@ -89,6 +92,10 @@ export function PoIs() {
           openClosedFilter === "all" ||
           (openClosedFilter === "open" && isPoIOpen(poi) === 0) ||
           (openClosedFilter === "closed" && isPoIOpen(poi) !== 1)
+      ).filter(
+        (poi) =>
+          tagsFilter === "" ||
+          poi.tags.includes(tagsFilter.toLowerCase())
       );
   }
   return (
@@ -135,6 +142,24 @@ export function PoIs() {
               placeholder="Zoek een attractie"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
+            />
+
+            {/* Tags*/}
+            <TextField
+              fullWidth
+              sx={{ marginTop: "1rem" }}
+              id="tags"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <LabelIcon />
+                  </InputAdornment>
+                ),
+              }}
+              variant="standard"
+              placeholder="Zoek op tags"
+              value={tagsFilter}
+              onChange={(e) => setTagsFilter(e.target.value)}
             />
 
             {/* Filter on type */}

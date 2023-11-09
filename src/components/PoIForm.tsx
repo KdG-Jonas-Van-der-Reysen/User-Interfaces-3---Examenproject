@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { PointOfInterest } from "../model/PointOfInterest";
 import { usePointOfInterest } from "../hooks/usePointOfInterest";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { PoIMapDnD } from "./PoIMapDnD";
+import { ErrorSharp } from "@mui/icons-material";
 
 // Define a partial validation schema for the properties that need validation
 const poiSchema: z.ZodType<Partial<RideData>> = z.object({
@@ -116,7 +118,10 @@ export function PoIForm({ poi }: PoIFormProps) {
   const navigate = useNavigate();
 
   const watchType = watch("type", poi?.type || "attractie");
-  const watchHidden = watch("mapDrawingOptions.hidden",poi?.mapDrawingOptions?.hidden || false);
+  const watchHidden = watch(
+    "mapDrawingOptions.hidden",
+    poi?.mapDrawingOptions?.hidden || false
+  );
   const isEdit = !!poi;
 
   return (
@@ -127,7 +132,7 @@ export function PoIForm({ poi }: PoIFormProps) {
           console.log("adding ride");
           const ride: Omit<Ride, "id"> = {
             ...data,
-            tags: data.tagsStr.split(","),
+            tags: data.tagsStr.toLowerCase().split(","),
             similarRides: data.similarRidesStr.split(","),
           };
           console.log("ride", ride);
@@ -143,7 +148,7 @@ export function PoIForm({ poi }: PoIFormProps) {
             type: data.type,
             image: data.image,
             description: data.description,
-            tags: data.tagsStr.split(","),
+            tags: data.tagsStr.toLowerCase().split(","),
             openingHours: {
               openTime: data.openingHours.openTime,
               closeTime: data.openingHours.closeTime,
@@ -390,105 +395,49 @@ export function PoIForm({ poi }: PoIFormProps) {
         </Box>
 
         <p style={{ fontWeight: "bold", marginBottom: 0 }}>Kaartinfo</p>
+
         <FormControlLabel
           sx={{ marginBottom: "-15px" }}
           control={
             <Controller
               name="mapDrawingOptions.hidden"
               control={control}
-              render={({ field }) => <Switch checked={field.value} onChange={(e) => {field.onChange(e.target.checked)}} />}
+              render={({ field }) => (
+                <Switch
+                  checked={field.value}
+                  onChange={(e) => {
+                    field.onChange(e.target.checked);
+                  }}
+                />
+              )}
             />
           }
           label="Zone reeds op kaart aangeduid?"
         />
+
         <small style={{ marginBottom: "1rem" }}>
           Hiermee zal er geen icoontje weergegeven worden, maar kun je wel een
           "klikbare zone" instellen
         </small>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <InputLabel sx={{ marginBottom: "15px" }}>Locatie</InputLabel>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "1rem",
-                alignItems: "center",
+
+        <Controller
+          name="mapDrawingOptions"
+          control={control}
+          render={({ field }) => (
+            <PoIMapDnD
+              type={watchType}
+              name={watch("name")}
+              mapDrawingOptions={field.value}
+              setMapDrawingOptions={(mapDrawingOptions) => {
+                field.onChange(mapDrawingOptions);
               }}
-            >
-              <Controller
-                name="mapDrawingOptions.location.x"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    type="number"
-                    {...field}
-                    style={{ display: "block" }}
-                    label="X"
-                    error={!!errors.mapDrawingOptions?.location?.x}
-                    helperText={errors.mapDrawingOptions?.location?.x?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="mapDrawingOptions.location.y"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    required
-                    style={{ display: "block" }}
-                    label="Y"
-                    error={!!errors.mapDrawingOptions?.location?.y}
-                    helperText={errors.mapDrawingOptions?.location?.y?.message}
-                  />
-                )}
-              />
-            </Box>
-          </Grid>
-          {watchHidden && (<Grid item xs={12} md={6}>
-            <InputLabel sx={{ marginBottom: "16px" }}>
-              Afmetingen klikbare zone
-            </InputLabel>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                gap: "1rem",
-                alignItems: "center",
-              }}
-            >
-              <Controller
-                name="mapDrawingOptions.size.width"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    required
-                    style={{ display: "block" }}
-                    label="Breedte"
-                    error={!!errors.mapDrawingOptions?.size?.width}
-                    helperText={errors.mapDrawingOptions?.size?.width?.message}
-                  />
-                )}
-              />
-              <Controller
-                name="mapDrawingOptions.size.height"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    required
-                    style={{ display: "block" }}
-                    label="Hoogte"
-                    error={!!errors.mapDrawingOptions?.size?.height}
-                    helperText={errors.mapDrawingOptions?.size?.height?.message}
-                  />
-                )}
-              />
-            </Box>
-          </Grid>)}
-        </Grid>
+            />
+          )}
+        />
+
+        {!!errors.mapDrawingOptions && (
+          <p>{JSON.stringify(errors.mapDrawingOptions)}</p>
+        )}
 
         {/* Submit */}
         <button type="submit">{poi ? "Opslaan" : "Toevoegen"}</button>

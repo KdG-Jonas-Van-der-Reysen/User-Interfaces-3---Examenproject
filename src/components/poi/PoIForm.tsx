@@ -18,7 +18,6 @@ import { PointOfInterest } from "../../model/PointOfInterest";
 import { usePointOfInterest } from "../../hooks/usePointOfInterest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PoIMapDnD } from "./maps/PoIMapDnD";
-import { ErrorSharp } from "@mui/icons-material";
 
 // Define a partial validation schema for the properties that need validation
 const poiSchema: z.ZodType<Partial<RideData>> = z.object({

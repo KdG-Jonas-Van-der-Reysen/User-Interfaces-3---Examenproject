@@ -107,17 +107,14 @@ export function PoIForm({ poi }: PoIFormProps) {
     },
   });
 
-  const { addPointOfInterest } = usePointOfInterests();
+  const { addPointOfInterest } = usePointOfInterests("");
 
   const id: string = `${poi?.id || "1"}`;
   const { editPointOfInterest } = usePointOfInterest(id);
   const navigate = useNavigate();
 
   const watchType = watch("type", poi?.type || "attractie");
-  const watchHidden = watch(
-    "mapDrawingOptions.hidden",
-    poi?.mapDrawingOptions?.hidden || false
-  );
+  
   const isEdit = !!poi;
 
   return (

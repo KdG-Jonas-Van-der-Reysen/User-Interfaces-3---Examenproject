@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from "react";
-import { Box, Chip, Link } from "@mui/material";
-import { PointOfInterest } from "../../../model/PointOfInterest";
-import { Ride } from "../../../model/Ride";
 
 // Icons
 import AttractionsIcon from "@mui/icons-material/Attractions";
@@ -11,8 +8,8 @@ import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import FastfoodIcon from "@mui/icons-material/Fastfood";
 import KeyIcon from "@mui/icons-material/Key";
 import StorefrontIcon from "@mui/icons-material/Storefront";
-import { useNavigate } from "react-router-dom";
 import { Rnd } from "react-rnd";
+import { Box, Chip } from "@mui/material";
 
 interface IconMappings {
   [key: string]: React.ReactElement;
@@ -60,7 +57,7 @@ export function PoIMapDnD({
     y: mapDrawingOptions.location.y,
   });
 
-  const handleDragStop = (e: any, d: any) => {
+  const handleDragStop = (_e: any, d: any) => {
     setState({ ...state, x: d.x, y: d.y });
     setMapDrawingOptions({
       ...mapDrawingOptions,
@@ -72,10 +69,10 @@ export function PoIMapDnD({
   };
 
   const handleResizeStop = (
-    e: any,
-    direction: any,
+    _e: any,
+    _direction: any,
     ref: any,
-    delta: any,
+    _delta: any,
     position: any
   ) => {
     setState({

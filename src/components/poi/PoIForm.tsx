@@ -18,7 +18,6 @@ import { PointOfInterest } from "../../model/PointOfInterest";
 import { usePointOfInterest } from "../../hooks/usePointOfInterest";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PoIMapDnD } from "./maps/PoIMapDnD";
-import { ErrorSharp } from "@mui/icons-material";
 
 // Define a partial validation schema for the properties that need validation
 const poiSchema: z.ZodType<Partial<RideData>> = z.object({
@@ -107,13 +106,15 @@ export function PoIForm({ poi }: PoIFormProps) {
     },
   });
 
-  const { addPointOfInterest } = usePointOfInterests();
+  const { addPointOfInterest } = usePointOfInterests("");
 
   const id: string = `${poi?.id || "1"}`;
   const { editPointOfInterest } = usePointOfInterest(id);
   const navigate = useNavigate();
 
   const watchType = watch("type", poi?.type || "attractie");
+
+  // Niet verwijderen, dit is nodig om de d&d map te laten werken, ook al wordt het niet gebruikt
   const watchHidden = watch(
     "mapDrawingOptions.hidden",
     poi?.mapDrawingOptions?.hidden || false

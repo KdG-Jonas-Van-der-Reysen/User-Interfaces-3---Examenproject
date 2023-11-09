@@ -1,7 +1,6 @@
 import { FormControlLabel, FormGroup, Switch, styled } from "@mui/material";
-import { useState } from "react";
 
-const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+const MaterialUISwitch = styled(Switch)(() => ({
   width: 62,
   height: 34,
   padding: 7,

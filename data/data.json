@@ -584,41 +584,6 @@
       "id": 22
     },
     {
-      "name": "Typhoon",
-      "type": "attractie",
-      "description": "Duistere krachten in Land of Legends wekten een eeuwige Typhoon op. De wervelwind brengt het hele rijk met al haar elementen in gevaar. De Guardian of Elements en de Skyriders werken samen om heks Wayra te vinden, maar ze hebben hulp nodig. Spring in de koets van de Skyriders, vlieg met hen mee en duik 25 meter het diepe in. Help jij heks Wayra in te tomen?",
-      "image": "https://www.bobbejaanland.be/content/dam/bjl/images/attractions/typhoon/Typhoon%20main.jpg",
-      "openingHours": {
-        "openTime": "10:00",
-        "closeTime": "20:00"
-      },
-      "tagsStr": "snel,rollercoaster",
-      "currentWaitTime": 24,
-      "mapDrawingOptions": {
-        "location": {
-          "x": 150,
-          "y": 181
-        },
-        "size": {
-          "width": 15,
-          "height": 15
-        },
-        "hidden": false
-      },
-      "minLength": 125,
-      "similarRidesStr": "20,1",
-      "targetAudience": "adults",
-      "tags": [
-        "snel",
-        "rollercoaster"
-      ],
-      "similarRides": [
-        "20",
-        "1"
-      ],
-      "id": 23
-    },
-    {
       "name": "Giftshop",
       "type": "winkel",
       "image": "https://www.walibi.nl/sites/default/files/styles/1280x670/public/entertainment/2019-02/W.A.B%20Shop.JPG?itok=cnKEltXz",
